@@ -10,7 +10,7 @@ jobs:
         with:
           fetch-depth: 0
       - uses: yesolutions/mirror-action@master
-          with:
-            REMOTE: 'https://gitlab.com/spyoungtech/mirror-action.git'
-            GIT_USERNAME: xavier.stouder
-            GIT_PASSWORD: ${{ secrets.GIT_PASSWORD }}
+        with:
+          REMOTE: 'https://gitlab.com/spyoungtech/mirror-action.git'
+          GIT_USERNAME: xavier.stouder
+          GIT_PASSWORD: ${{ secrets.GIT_PASSWORD }}
