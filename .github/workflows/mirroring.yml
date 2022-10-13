@@ -11,6 +11,6 @@ jobs:
           fetch-depth: 0
       - uses: yesolutions/mirror-action@master
         with:
-          REMOTE: 'https://gitlab.com/spyoungtech/mirror-action.git'
+          REMOTE: 'https://gitlab-etu.ing.he-arc.ch/isc/2022-23/niveau-3/3281.1-projet-p3-sa-il/222/hydra.git'
           GIT_USERNAME: xavier.stouder
           GIT_PASSWORD: ${{ secrets.GIT_PASSWORD }}
