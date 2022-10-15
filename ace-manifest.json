@@ -1,5 +1,17 @@
 {
   "commands": {
+    "fetch:ofev": {
+      "settings": {
+        "loadApp": true,
+        "stayAlive": false
+      },
+      "commandPath": "./commands/FetchOfev",
+      "commandName": "fetch:ofev",
+      "description": "Fetch live OFEV data from SwissHydroApi",
+      "args": [],
+      "aliases": [],
+      "flags": []
+    },
     "dump:rcfile": {
       "settings": {},
       "commandPath": "@adonisjs/core/build/commands/DumpRc",
