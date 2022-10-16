@@ -58,11 +58,9 @@ export default class FetchOfev extends BaseCommand {
         `${getProgressBar(pool.processedPercentage())} ${pool.processedPercentage().toFixed(0)}%`
       )
 
-    const measuresTransaction = await Database.transaction()
-
     // Handle stations in promise pool
     const { results, errors } = await PromisePool.for(stations)
-      .withConcurrency(50)
+      .withConcurrency(10)
       .onTaskStarted(logUpdate)
       .onTaskFinished(logUpdate)
       .handleError((error, station) => {
@@ -72,10 +70,8 @@ export default class FetchOfev extends BaseCommand {
         api
           .get<OFEVStationResponse>(`station/${station.id}`)
           .then((response) => response.data)
-          .then((data) => this.handleStation(station.id, data, measuresTransaction))
+          .then((data) => this.handleStation(station.id, data))
       )
-
-    await measuresTransaction.commit()
 
     this.logger.logUpdatePersist()
     this.logger.success('fetched stations', undefined, `${results.length}`)
@@ -87,8 +83,7 @@ export default class FetchOfev extends BaseCommand {
 
   private async handleStation(
     id: string,
-    { name, coordinates, waterBodyName, waterBodyType, parameters }: OFEVStationResponse,
-    transaction: TransactionClientContract
+    { name, coordinates, waterBodyName, waterBodyType, parameters }: OFEVStationResponse
   ) {
     // Find by vendor id or create station
     const station = await Station.firstOrCreate(
@@ -106,7 +101,6 @@ export default class FetchOfev extends BaseCommand {
       Object.keys(parameters).map((parameterKey: keyof StationParameters) => {
         const { value, unit, datetime } = parameters[parameterKey]!
         const measure = new Measure()
-        measure.useTransaction(transaction)
         measure.stationId = station.id
         measure.type = parameterKey
         measure.value = parameterKey === 'discharge' ? this.normalizeDischarge(value, unit) : value
