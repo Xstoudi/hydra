@@ -34,3 +34,5 @@ type StationParameterCommon = {
   mean24h: number
   min24h: number
 }
+
+type GeoCoordinate = { latitude: number; longitude: number }
