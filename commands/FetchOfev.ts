@@ -1,15 +1,13 @@
 import { BaseCommand } from '@adonisjs/core/build/standalone'
-import axios from 'axios'
+import axios, { AxiosInstance } from 'axios'
 import camelize from 'App/Utils/Camelize'
-import { OnProgressCallback, PromisePool, StopThePromisePoolError } from '@supercharge/promise-pool'
+import { OnProgressCallback, PromisePool } from '@supercharge/promise-pool'
 import getProgressBar from 'App/Utils/ProgressBarLogger'
-import uniqWith from 'lodash/uniqWith'
-import isEqual from 'lodash/isEqual'
 import Station from 'App/Models/Station'
 import Measure from 'App/Models/Measure'
-import { DateTime } from 'luxon'
-import Database, { TransactionClientContract } from '@ioc:Adonis/Lucid/Database'
-import { logger } from 'Config/app'
+import { DateTime, Duration } from 'luxon'
+import wait from 'App/Utils/Wait'
+import durationHumanizer from 'App/Utils/DurationHumanizer'
 
 export default class FetchOfev extends BaseCommand {
   /**
@@ -35,7 +33,7 @@ export default class FetchOfev extends BaseCommand {
      * you manually decide to exit the process. Don't forget to call
      * `node ace generate:manifest` afterwards.
      */
-    stayAlive: false,
+    stayAlive: true,
   }
 
   public static readonly API_URL: string = 'https://swisshydroapi.bouni.de/api/v1/'
@@ -51,6 +49,28 @@ export default class FetchOfev extends BaseCommand {
       return response
     })
 
+    // eslint-disable-next-line no-constant-condition
+    while (true) {
+      const startTime = Date.now()
+      try {
+        await this.pollerRoutine(api)
+      } catch (error) {
+        this.logger.error(error)
+      }
+
+      const tookTime = Date.now() - startTime
+      const toWait = 600000 - tookTime
+
+      this.logger.info(
+        `polling took ${durationHumanizer(
+          Duration.fromMillis(tookTime)
+        )} --> waiting ${durationHumanizer(Duration.fromMillis(toWait))}...`
+      )
+      await wait(toWait)
+    }
+  }
+
+  private async pollerRoutine(api: AxiosInstance) {
     const { data: stations } = await api.get<OFEVStationsResponse>('stations')
 
     this.logger.info('fetching stations...', undefined, `${stations.length}`)
@@ -80,7 +100,6 @@ export default class FetchOfev extends BaseCommand {
         this.logger.error(error)
       }
     }
-    await this.exit()
   }
 
   private async handleStation(
@@ -100,14 +119,31 @@ export default class FetchOfev extends BaseCommand {
     )
 
     const parametersSaved = await Promise.allSettled(
-      Object.keys(parameters).map((parameterKey: keyof StationParameters) => {
+      Object.keys(parameters).map(async (parameterKey: keyof StationParameters) => {
         const { value, unit, datetime } = parameters[parameterKey]!
+
+        const normalizedValue =
+          parameterKey === 'discharge' ? this.normalizeDischarge(value, unit) : value
+
+        // Check if latest measure was already saved as a different time
+        const falselyUpdatedMeasure = await Measure.query()
+          .where({
+            stationId: station.id,
+            type: parameterKey,
+          })
+          .orderBy('id', 'desc')
+          .first()
+
+        if (falselyUpdatedMeasure !== null && falselyUpdatedMeasure.value === normalizedValue) {
+          return
+        }
+
         const measure = new Measure()
         measure.stationId = station.id
         measure.type = parameterKey
-        measure.value = parameterKey === 'discharge' ? this.normalizeDischarge(value, unit) : value
+        measure.value = normalizedValue
         measure.measuredAt = DateTime.fromISO(datetime)
-        return measure.save().catch((error) => {
+        await measure.save().catch((error) => {
           if (error.code !== '23505') throw error
         })
       })
