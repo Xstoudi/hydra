@@ -9,6 +9,7 @@ import Station from 'App/Models/Station'
 import Measure from 'App/Models/Measure'
 import { DateTime } from 'luxon'
 import Database, { TransactionClientContract } from '@ioc:Adonis/Lucid/Database'
+import { logger } from 'Config/app'
 
 export default class FetchOfev extends BaseCommand {
   /**
@@ -63,9 +64,6 @@ export default class FetchOfev extends BaseCommand {
       .withConcurrency(10)
       .onTaskStarted(logUpdate)
       .onTaskFinished(logUpdate)
-      .handleError((error, station) => {
-        this.logger.error(error.message)
-      })
       .process((station) =>
         api
           .get<OFEVStationResponse>(`station/${station.id}`)
@@ -75,8 +73,12 @@ export default class FetchOfev extends BaseCommand {
 
     this.logger.logUpdatePersist()
     this.logger.success('fetched stations', undefined, `${results.length}`)
+
     if (errors.length > 0) {
       this.logger.warning('failed to fetch stations', undefined, `${errors.length}`)
+      for (const error of errors) {
+        this.logger.error(error)
+      }
     }
     await this.exit()
   }
@@ -97,7 +99,7 @@ export default class FetchOfev extends BaseCommand {
       }
     )
 
-    await Promise.allSettled(
+    const parametersSaved = await Promise.allSettled(
       Object.keys(parameters).map((parameterKey: keyof StationParameters) => {
         const { value, unit, datetime } = parameters[parameterKey]!
         const measure = new Measure()
@@ -105,9 +107,17 @@ export default class FetchOfev extends BaseCommand {
         measure.type = parameterKey
         measure.value = parameterKey === 'discharge' ? this.normalizeDischarge(value, unit) : value
         measure.measuredAt = DateTime.fromISO(datetime)
-        return measure.save()
+        return measure.save().catch((error) => {
+          if (error.code !== '23505') throw error
+        })
       })
     )
+
+    parametersSaved.forEach((result) => {
+      if (result.status === 'rejected') {
+        throw result.reason
+      }
+    })
   }
 
   private normalizeDischarge(value: number, unit: string) {
