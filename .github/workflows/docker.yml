@@ -44,4 +44,4 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          file: {context}/Dockerfile.poller
+          file: Dockerfile.poller
