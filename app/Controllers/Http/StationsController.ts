@@ -7,7 +7,11 @@ export default class StationsController {
     const { lat, lon } = await request.validate(GetStationsValidator)
 
     const query =
-      lat !== undefined && lon !== undefined ? Station.allByDistance(lat, lon) : Station.query()
+      lat !== undefined && lon !== undefined
+        ? Station.query().withScopes((scopes) => scopes.byDistance(lat, lon))
+        : Station.query()
+
+    query.withScopes((scopes) => scopes.withStats())
 
     return query
   }
