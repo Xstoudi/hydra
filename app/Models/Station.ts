@@ -16,7 +16,6 @@ import Measure from './Measure'
 type StationQuery = ModelQueryBuilderContract<typeof Station>
 
 export default class Station extends BaseModel {
-
   public serializeExtras = true
 
   @column({ isPrimary: true })
@@ -88,26 +87,15 @@ export default class Station extends BaseModel {
 
   public static withStats = scope((query: StationQuery) => {
     query.select(
-      Database
-        .from('measures')
-        .select('value')
-        .where('type', 'temperature').andWhere('station_id', Database.raw('stations.id'))
-        .orderBy('measured_at', 'desc')
-        .limit(1)
-        .as('temperature'),
-      Database
-        .from('measures')
-        .select('value')
-        .where('type', 'discharge').andWhere('station_id', Database.raw('stations.id'))
-        .orderBy('measured_at', 'desc')
-        .limit(1)
-        .as('discharge'),
-      Database
-        .from('measures')
-        .select('value')
-        .where('type', 'level').andWhere('station_id', Database.raw('stations.id'))
-        .orderBy('measured_at', 'desc')
-        .limit(1)
-        .as('level')
+      ...['temperature', 'discharge', 'level'].map((field) =>
+        Database.from('measures')
+          .select('value')
+          .where('type', field)
+          .andWhere('station_id', Database.raw('stations.id'))
+          .orderBy('measured_at', 'desc')
+          .limit(1)
+          .as(field)
+      )
     )
+  })
 }
