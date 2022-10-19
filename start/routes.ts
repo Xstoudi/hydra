@@ -6,9 +6,9 @@ import path from 'path'
 const isDevEnv = Env.get('NODE_ENV') === 'development'
 
 Route.group(() => {
-  Route.get('/', async () => {
-    return { hello: 'world' }
-  })
+  Route.get('/stations', 'StationsController.stations')
+  Route.get('/stations/:id', 'StationsController.station')
+  Route.get('/stations/:id/measures', 'StationsController.measures')
 }).prefix('/api')
 
 if (isDevEnv) {

@@ -26,7 +26,7 @@ export default class Station extends BaseModel {
   @column({
     prepare: (value?: GeoCoordinate) => {
       return value
-        ? Database.st().geographyFromText(`Point(${value.longitude} ${value.latitude})`)
+        ? Database.st().geographyFromText(`POINT(${value.longitude} ${value.latitude})`)
         : value
     },
     consume: (value?: string) => {
@@ -67,5 +67,14 @@ export default class Station extends BaseModel {
   @beforeFetch()
   public static async fetchCoordinates(query: StationQuery) {
     query.select(Database.raw('*, ST_AsText(coordinates) as coordinates'))
+  }
+
+  public static allByDistance(latitude: number, longitude: number) {
+    return Station.query().orderByRaw(
+      Database.st().distance(
+        'coordinates',
+        Database.st().geographyFromText(`POINT(${longitude} ${latitude})`)
+      )
+    )
   }
 }
