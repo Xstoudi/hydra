@@ -11,7 +11,6 @@
 import knexPostgis from 'knex-postgis'
 import Database from '@ioc:Adonis/Lucid/Database'
 import Event from '@ioc:Adonis/Core/Event'
-import Logger from '@ioc:Adonis/Core/Logger'
 
 Database.Database.macro('st', function (connectionName?: string) {
   connectionName = connectionName || this.primaryConnectionName

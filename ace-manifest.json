@@ -1,29 +1,5 @@
 {
   "commands": {
-    "app:build": {
-      "settings": {
-        "loadApp": true,
-        "stayAlive": false
-      },
-      "commandPath": "./commands/AppBuild",
-      "commandName": "app:build",
-      "description": "Unified Adonis & Vite build",
-      "args": [],
-      "aliases": [],
-      "flags": []
-    },
-    "app:dev": {
-      "settings": {
-        "loadApp": true,
-        "stayAlive": false
-      },
-      "commandPath": "./commands/AppDev",
-      "commandName": "app:dev",
-      "description": "Unified Adonis & Vite dev mode",
-      "args": [],
-      "aliases": [],
-      "flags": []
-    },
     "fetch:ofev": {
       "settings": {
         "loadApp": true,

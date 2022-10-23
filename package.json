@@ -3,12 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build:adonis": "node ace build --production",
-    "build:vite": "tsc -p ./ui && vite build ./ui",
-    "build": "node ace app:build",
-    "dev:adonis": "node ace serve --watch",
-    "dev:vite": "vite ./ui",
-    "dev": "node ace app:dev",
+    "build": "node ace build --production",
+    "dev": "node ace serve --watch",
     "start": "node server.js",
     "lint": "eslint .",
     "format": "prettier --write ."
@@ -25,48 +21,12 @@
       "prettier/prettier": [
         "error"
       ]
-    },
-    "overrides": [
-      {
-        "files": [
-          "ui/src/**/*"
-        ],
-        "extends": [
-          "plugin:react/recommended",
-          "plugin:import/recommended",
-          "plugin:jsx-a11y/recommended",
-          "plugin:@typescript-eslint/recommended",
-          "prettier"
-        ],
-        "parserOptions": { "project": ["./ui/tsconfig.json"] },
-        "plugins": [
-          "prettier"
-        ],
-        "rules": {
-          "react/react-in-jsx-scope": "off",
-          "prettier/prettier": [
-            "error"
-          ]
-        },
-        "settings": {
-          "import/resolver": {
-            "node": {
-              "paths": ["src"],
-              "extensions": [".js", ".jsx", ".ts", ".tsx"]
-            }
-          },
-          "react": {
-            "version": "detect"
-          }
-        }
-      }
-    ]
+    }
   },
   "eslintIgnore": [
     "build",
-    "node_modules",
-    "vite.config.ts",
-    "prettierrc.js"
+    "ui",
+    "node_modules"
   ],
   "prettier": {
     "trailingComma": "es5",
@@ -87,18 +47,11 @@
     "eslint": "^8.25.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-adonis": "^2.1.1",
-    "prettier": "^2.7.1",
-    "youch": "^3.2.2",
-    "youch-terminal": "^2.1.5",
-    "@types/react": "^18.0.21",
-    "@types/react-dom": "^18.0.6",
-    "@vitejs/plugin-react": "^2.1.0",
-    "typescript": "^4.6.4",
-    "vite": "^3.1.8",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-jsx-a11y": "^6.6.1",
     "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-react": "^7.31.10"
+    "prettier": "^2.7.1",
+    "typescript": "^4.6.4",
+    "youch": "^3.2.2",
+    "youch-terminal": "^2.1.5"
   },
   "dependencies": {
     "@adonisjs/core": "^5.8.7",
@@ -107,7 +60,6 @@
     "@adonisjs/view": "^6.2.0",
     "@supercharge/promise-pool": "^2.3.2",
     "axios": "^1.1.3",
-    "execa": "^5.1.1",
     "knex-postgis": "^0.14.3",
     "lodash": "^4.17.21",
     "luxon": "^3.0.4",
@@ -115,8 +67,6 @@
     "pino-pretty": "^9.1.1",
     "proxy-addr": "^2.0.7",
     "reflect-metadata": "^0.1.13",
-    "source-map-support": "^0.5.21",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "source-map-support": "^0.5.21"
   }
 }
