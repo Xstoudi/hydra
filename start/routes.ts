@@ -6,10 +6,12 @@ import path from 'path'
 const isDevEnv = Env.get('NODE_ENV') === 'development'
 
 Route.group(() => {
-  Route.get('/stations', 'StationsController.stations')
-  Route.get('/stations/:id', 'StationsController.station')
-  Route.get('/stations/:id/measures', 'StationsController.measures')
-}).prefix('/api')
+  Route.get('/stations', 'StationsController.stations').as('stations')
+  Route.get('/stations/:id', 'StationsController.station').as('station')
+  Route.get('/stations/:id/measures', 'StationsController.measures').as('measures')
+})
+  .prefix('/api')
+  .where('id', Route.matchers.number())
 
 if (isDevEnv) {
   Route.get('/src/*', async ({ request, response }) => {

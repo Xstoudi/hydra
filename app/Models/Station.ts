@@ -73,7 +73,7 @@ export default class Station extends BaseModel {
   @beforeFind()
   @beforeFetch()
   public static async fetchCoordinates(query: StationQuery) {
-    query.select(Database.raw('*, ST_AsText(coordinates) as coordinates'))
+    query.select('*', Database.raw('ST_AsText(coordinates) as coordinates'))
   }
 
   public static byDistance = scope((query: StationQuery, latitude: number, longitude: number) => {

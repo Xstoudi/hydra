@@ -10,16 +10,12 @@
     "dev:vite": "vite ./ui",
     "dev": "node ace app:dev",
     "start": "node server.js",
-    "lint": "eslint . --ext=.ts",
+    "lint": "eslint .",
     "format": "prettier --write ."
   },
   "eslintConfig": {
     "extends": [
       "plugin:adonis/typescriptApp",
-      "plugin:react/recommended",
-      "plugin:import/recommended",
-      "plugin:jsx-a11y/recommended",
-      "plugin:@typescript-eslint/recommended",
       "prettier"
     ],
     "plugins": [
@@ -29,11 +25,48 @@
       "prettier/prettier": [
         "error"
       ]
-    }
+    },
+    "overrides": [
+      {
+        "files": [
+          "ui/src/**/*"
+        ],
+        "extends": [
+          "plugin:react/recommended",
+          "plugin:import/recommended",
+          "plugin:jsx-a11y/recommended",
+          "plugin:@typescript-eslint/recommended",
+          "prettier"
+        ],
+        "parserOptions": { "project": ["./ui/tsconfig.json"] },
+        "plugins": [
+          "prettier"
+        ],
+        "rules": {
+          "react/react-in-jsx-scope": "off",
+          "prettier/prettier": [
+            "error"
+          ]
+        },
+        "settings": {
+          "import/resolver": {
+            "node": {
+              "paths": ["src"],
+              "extensions": [".js", ".jsx", ".ts", ".tsx"]
+            }
+          },
+          "react": {
+            "version": "detect"
+          }
+        }
+      }
+    ]
   },
   "eslintIgnore": [
     "build",
-    "ui"
+    "node_modules",
+    "vite.config.ts",
+    "prettierrc.js"
   ],
   "prettier": {
     "trailingComma": "es5",
@@ -50,19 +83,22 @@
     "@japa/preset-adonis": "^1.2.0",
     "@japa/runner": "^2.2.1",
     "@types/lodash": "^4.14.186",
-    "@types/react": "^18.0.17",
-    "@types/react-dom": "^18.0.6",
-    "@vitejs/plugin-react": "^2.1.0",
     "adonis-preset-ts": "^2.1.0",
     "eslint": "^8.25.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-adonis": "^2.1.1",
-    "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.7.1",
-    "typescript": "~4.6",
-    "vite": "^3.1.0",
     "youch": "^3.2.2",
-    "youch-terminal": "^2.1.5"
+    "youch-terminal": "^2.1.5",
+    "@types/react": "^18.0.21",
+    "@types/react-dom": "^18.0.6",
+    "@vitejs/plugin-react": "^2.1.0",
+    "typescript": "^4.6.4",
+    "vite": "^3.1.8",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.31.10"
   },
   "dependencies": {
     "@adonisjs/core": "^5.8.7",
@@ -78,9 +114,9 @@
     "pg": "^8.8.0",
     "pino-pretty": "^9.1.1",
     "proxy-addr": "^2.0.7",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "reflect-metadata": "^0.1.13",
-    "source-map-support": "^0.5.21"
+    "source-map-support": "^0.5.21",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }
