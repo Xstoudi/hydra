@@ -1,16 +1,22 @@
 import Twemoji from '../components/Twemoji'
 import { ChevronUpDownIcon, CheckIcon } from '@heroicons/react/24/outline'
 import { Listbox, Transition } from '@headlessui/react'
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 const langs = [
-  { id: 0, name: 'Français', emoji: '🇫🇷' },
-  { id: 1, name: 'English', emoji: '🇬🇧' },
+  { id: 0, name: 'Français', key: 'fr', emoji: '🇫🇷' },
+  { id: 1, name: 'English', key: 'en', emoji: '🇬🇧' },
 ]
 
 
 export default function LangSelector() {
   const [selectedLang, setSelectedLang] = useState(langs[0])
+  const { i18n } = useTranslation()
+
+  useEffect(() => {
+    i18n.changeLanguage(selectedLang.key)
+  }, [selectedLang])
 
   return (
     <Listbox value={selectedLang} onChange={setSelectedLang}>
