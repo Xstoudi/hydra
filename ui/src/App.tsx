@@ -1,13 +1,14 @@
-import { Route, Routes } from "react-router-dom"
-import Home from "./pages/Home"
-import Stations from "./pages/Stations"
+import { Route, Routes } from 'react-router-dom'
+import MainLayout from './layouts/MainLayout'
+import Home from './pages/Home'
+import Stations from './pages/Stations'
 
 function App() {
   return (
     <>
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/stations' element={<Stations />} />
+        <Route path='/stations' element={<MainLayout><Stations /></MainLayout>} />
       </Routes>
     </>
   )

@@ -11,6 +11,8 @@
     "rules": "eslint --print-config src/main.tsx > test.txt"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.3",
+    "@heroicons/react": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^5.40.1",
     "@typescript-eslint/parser": "^5.40.1",
     "eslint": "^8.26.0",
@@ -21,7 +23,8 @@
     "prettier": "^2.7.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.4.2"
+    "react-router-dom": "^6.4.2",
+    "twemoji": "^14.0.2"
   },
   "devDependencies": {
     "@types/react": "^18.0.17",
@@ -73,7 +76,39 @@
     },
     "rules": {
       "react/react-in-jsx-scope": "off",
-      "jsx-quotes": ["error", "prefer-single"]
+      "jsx-quotes": [
+        "error",
+        "prefer-single"
+      ],
+      "object-curly-spacing": [
+        "error",
+        "always"
+      ],
+      "semi": [
+        "error",
+        "never"
+      ],
+      "@typescript-eslint/quotes": [
+        "error",
+        "single"
+      ],
+      "@typescript-eslint/semi": [
+        "error",
+        "never"
+      ],
+      "@typescript-eslint/member-delimiter-style": [
+        "error",
+        {
+          "multiline": {
+            "delimiter": "none",
+            "requireLast": true
+          },
+          "singleline": {
+            "delimiter": "comma",
+            "requireLast": false
+          }
+        }
+      ]
     }
   },
   "eslintIgnore": [
