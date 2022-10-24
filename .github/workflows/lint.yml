@@ -11,8 +11,8 @@ jobs:
       run: npm ci
     - name: Run ESLint
       run: npm run lint
-  lint-back:
-    name: Lint backend code
+  lint-front:
+    name: Lint frontend code
     runs-on: ubuntu-latest
     working-directory: ui
     steps:
