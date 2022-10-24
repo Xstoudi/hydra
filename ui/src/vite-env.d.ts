@@ -2,15 +2,10 @@
 
 import 'react-i18next'
 
-import enHome from './assets/locales/en/home.json'
+import { resources } from './utils/i18n'
 
-type TranslationMap = { home: typeof enHome }
-
-declare module 'react-i18next' {
+declare module 'i18next' {
   interface CustomTypeOptions {
-    resources: {
-      fr: TranslationMap
-      en: TranslationMap
-    }
+    resources: typeof resources['en']
   }
 }

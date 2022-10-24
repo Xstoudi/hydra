@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import LangSelector from './LangSelector'
 
 export default function Hero() {
-  const { t } = useTranslation(['home'])
+  const { t } = useTranslation('home')
 
   return (
     <header className=' bg-hero-background bg-cover bg-center'>
