@@ -1,0 +1,23 @@
+name: CI
+on: push
+jobs:
+  lint-back:
+    name: Lint backend code
+    runs-on: ubuntu-latest
+    working-directory: .
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install modules
+      run: npm ci
+    - name: Run ESLint
+      run: npm run lint
+  lint-back:
+    name: Lint backend code
+    runs-on: ubuntu-latest
+    working-directory: ui
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install modules
+      run: npm ci
+    - name: Run ESLint
+      run: npm run lint
