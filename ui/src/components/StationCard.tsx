@@ -1,5 +1,5 @@
 import Card from './Card'
-import Twemoji from './Twemoji'
+import CardStat from './CardStat'
 
 interface StationCardProps {
   station: StationData
@@ -10,20 +10,13 @@ export default function StationCard({ station }: StationCardProps) {
     <Card title={station.name} description={station.water_body_name}>
       <div className='flex flex-col'>
         {
-          station.meta.temperature !== null && (
-            <div className='flex flex-row justify-between'>
-              <Twemoji emoji='🌡️' />
-              <span className='text-gray-900'>{station.meta.temperature} °C</span>
-            </div>
-          )
+          station.meta.temperature !== null && <CardStat emoji='🌡️' value={station.meta.temperature} unit='°C' />
         }
         {
-          station.meta.discharge !== null && (
-            <div className='flex flex-row justify-between'>
-              <Twemoji emoji='💦' />
-              <span className='text-gray-900'>{station.meta.discharge} m3/s</span>
-            </div>
-          )
+          station.meta.discharge !== null && <CardStat emoji='💦' value={station.meta.discharge} unit='m3/s' />
+        }
+        {
+          station.meta.level !== null && <CardStat emoji='📏' value={station.meta.level} unit='m' />
         }
       </div>
     </Card>

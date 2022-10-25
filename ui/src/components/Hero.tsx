@@ -5,6 +5,12 @@ import LangSelector from './LangSelector'
 export default function Hero() {
   const { t } = useTranslation('home')
 
+  navigator.geolocation.getCurrentPosition((position) => {
+    console.log(position)
+  }, (error) => {
+    console.log(error)
+  })
+
   return (
     <header className=' bg-hero-background bg-cover bg-center'>
       <div className='w-full h-screen backdrop-blur-sm'>

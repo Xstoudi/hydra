@@ -58,9 +58,6 @@ export default class Station extends BaseModel {
   @column()
   public vendorIdentifier: string
 
-  @computed()
-  public temperature?: number
-
   @hasMany(() => Measure)
   public measures: HasMany<typeof Measure>
 
