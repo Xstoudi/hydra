@@ -26,7 +26,6 @@
     "i18next": "^22.0.2",
     "i18next-browser-languagedetector": "^6.1.8",
     "leaflet": "^1.9.2",
-    "prettier": "^2.7.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-i18next": "^12.0.0",
@@ -40,20 +39,14 @@
     "@types/react-dom": "^18.0.6",
     "@vitejs/plugin-react": "^2.1.0",
     "autoprefixer": "^10.4.12",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-tailwindcss": "^3.6.2",
     "postcss": "^8.4.18",
+    "prettier": "^2.7.1",
+    "prettier-plugin-tailwindcss": "^0.1.13",
     "tailwindcss": "^3.2.1",
     "typescript": "^4.6.4",
     "vite": "^3.1.0"
-  },
-  "prettier": {
-    "trailingComma": "es5",
-    "semi": false,
-    "singleQuote": true,
-    "useTabs": false,
-    "quoteProps": "consistent",
-    "bracketSpacing": true,
-    "arrowParens": "always",
-    "printWidth": 100
   },
   "eslintConfig": {
     "root": true,
@@ -63,8 +56,9 @@
       "plugin:import/recommended",
       "plugin:jsx-a11y/recommended",
       "plugin:@typescript-eslint/recommended",
-      "eslint-config-prettier"
+      "plugin:tailwindcss/recommended"
     ],
+    "plugins": ["tailwindcss"],
     "settings": {
       "react": {
         "version": "detect"
@@ -117,7 +111,31 @@
             "requireLast": false
           }
         }
-      ]
+      ],
+      "max-len": [
+        "error",
+        {
+          "code": 120,
+          "ignoreStrings": true
+        }
+      ],
+      "no-tabs": "error",
+      "indent": [
+        "error",
+        2
+      ],
+      "react/jsx-curly-spacing": [
+        "error",
+        "always"
+      ],
+      "react/jsx-curly-newline": [
+        "error",
+        {
+          "multiline": "require",
+          "singleline": "forbid"
+        }
+      ],
+      "tailwindcss/no-custom-classname": "off"
     }
   },
   "eslintIgnore": [

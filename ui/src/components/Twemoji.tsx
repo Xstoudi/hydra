@@ -9,10 +9,24 @@ interface TwemojiProps {
 }
 
 export default function Twemoji({ emoji, size = 'md' }: TwemojiProps) {
-  return <span className={clsx(size === 'lg' && 'w-10 h-10', size === 'md' && 'w-8 h-8', size === 'sm' && 'w-6 h-6', 'mr-[.05rem] ml-[.1rem] align-[-0.1rem]')} dangerouslySetInnerHTML={{
-    __html: twemoji.parse(emoji, {
-      folder: 'svg',
-      ext: '.svg'
-    })
-  }} />
+  return (
+    <span
+      className={
+        clsx(
+          size === 'lg' && 'h-10 w-10',
+          size === 'md' && 'h-8 w-8',
+          size === 'sm' && 'h-6 w-6',
+          'mr-[.05rem] ml-[.1rem] align-[-0.1rem]'
+        ) 
+      }
+      dangerouslySetInnerHTML={
+        {
+          __html: twemoji.parse(emoji, {
+            folder: 'svg',
+            ext: '.svg',
+          }),
+        } 
+      }
+    />
+  )
 }

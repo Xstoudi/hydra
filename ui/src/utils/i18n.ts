@@ -11,7 +11,7 @@ export const resources = {
   },
   fr: {
     home: frHome,
-  }
+  },
 } as const
 
 export default use(LanguageDetector)
@@ -20,7 +20,7 @@ export default use(LanguageDetector)
     debug: true,
     fallbackLng: 'en',
     interpolation: {
-      escapeValue: false
+      escapeValue: false,
     },
-    resources: resources
+    resources: resources,
   })

@@ -11,11 +11,10 @@ import 'leaflet/dist/leaflet.css'
 
 const queryClient = new QueryClient()
 
-
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <BrowserRouter>
-      <QueryClientProvider client={queryClient}>
+      <QueryClientProvider client={ queryClient }>
         <App />
       </QueryClientProvider>
     </BrowserRouter>

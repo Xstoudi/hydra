@@ -7,8 +7,15 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/stations' element={<MainLayout><Stations /></MainLayout>} />
+        <Route path='/' element={ <Home /> } />
+        <Route
+          path='/stations'
+          element={
+            <MainLayout>
+              <Stations />
+            </MainLayout>
+          }
+        />
       </Routes>
     </>
   )
