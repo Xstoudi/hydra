@@ -8,7 +8,9 @@ export default function MainLayout({ children }: MainLayoutProps) {
   return (
     <div className='flex flex-col text-slate-900'>
       <Header />
-      {children}
+      {
+        children
+      }
     </div>
   )
 }

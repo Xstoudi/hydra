@@ -132,7 +132,7 @@
         "error",
         {
           "multiline": "require",
-          "singleline": "forbid"
+          "singleline": "require"
         }
       ],
       "tailwindcss/no-custom-classname": "off"

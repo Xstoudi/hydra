@@ -14,7 +14,11 @@ export default function Stations() {
           query.data
             ?.filter(station => Object.keys(station.meta).length > 0)
             .map(station => (
-              <StationCard key={ station.id } station={ station } />
+              <StationCard key={
+                station.id 
+              } station={
+                station 
+              } />
             ))
         }
       </div>
