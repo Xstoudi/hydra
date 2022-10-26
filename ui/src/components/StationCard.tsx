@@ -8,7 +8,7 @@ interface StationCardProps {
 export default function StationCard({ station }: StationCardProps) {
   return (
     <Card title={station.name} description={station.water_body_name}>
-      <div className='flex flex-col'>
+      <div className='flex flex-col gap-4 justify-center'>
         {
           station.meta.temperature !== null && <CardStat emoji='🌡️' value={station.meta.temperature} unit='°C' />
         }
