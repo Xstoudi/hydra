@@ -11,8 +11,8 @@ const langs = [
 
 
 export default function LangSelector() {
-  const [selectedLang, setSelectedLang] = useState(langs[0])
   const { i18n } = useTranslation()
+  const [selectedLang, setSelectedLang] = useState(langs.find((lang) => lang.key === i18n.language) || langs[0])
 
   useEffect(() => {
     i18n.changeLanguage(selectedLang.key)
