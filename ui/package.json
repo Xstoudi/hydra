@@ -126,13 +126,16 @@
       ],
       "react/jsx-curly-spacing": [
         "error",
-        "always"
+        {
+          "when": "never",
+          "children": true
+        }
       ],
       "react/jsx-curly-newline": [
         "error",
         {
           "multiline": "require",
-          "singleline": "require"
+          "singleline": "forbid"
         }
       ],
       "tailwindcss/no-custom-classname": "off"
