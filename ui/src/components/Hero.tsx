@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router-dom'
 
 import LangSelector from './LangSelector'
 
@@ -23,9 +24,7 @@ export default function Hero() {
         <div className='flex h-full w-full flex-col items-center justify-center  gap-4 text-white'>
           <h1 className='text-6xl'>Hydra</h1>
           <p className='text-center text-2xl'>{t('description')}</p>
-          <a href='/stations' className='rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 py-4 px-8 text-xl'>
-            {t('enter-app-button')}
-          </a>
+          <Link to='/stations' className='rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 py-4 px-8 text-xl'>{t('enter-app-button')}</Link>
         </div>
       </div>
     </header>
