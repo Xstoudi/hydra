@@ -1,15 +1,16 @@
 import Twemoji from '../components/Twemoji'
 import { ChevronUpDownIcon, CheckIcon } from '@heroicons/react/24/outline'
 import { Listbox, Transition } from '@headlessui/react'
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, memo, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-const langs = [
-  { id: 0, name: 'Français', key: 'fr', emoji: '🇫🇷' },
-  { id: 1, name: 'English', key: 'en', emoji: '🇬🇧' },
-]
 
-export default function LangSelector() {
+
+function LangSelector() {
+  const langs = [
+    { id: 0, name: 'Français', key: 'fr', emoji: '🇫🇷' },
+    { id: 1, name: 'English', key: 'en', emoji: '🇬🇧' },
+  ]
   const { i18n } = useTranslation()
   const [selectedLang, setSelectedLang] = useState(langs.find(lang => lang.key === i18n.language) || langs[0])
 
@@ -67,3 +68,5 @@ export default function LangSelector() {
     </Listbox>
   )
 }
+
+export default memo(LangSelector)

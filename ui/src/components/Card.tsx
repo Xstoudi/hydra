@@ -1,9 +1,12 @@
+import { memo } from 'react'
+
 interface CardProps {
   title: string
   description: string
   children: React.ReactNode
 }
-export default function Card({ title, description, children }: CardProps) {
+
+function Card({ title, description, children }: CardProps) {
   return (
     <div className='flex flex-col overflow-hidden bg-white shadow sm:rounded-lg'>
       <div className='px-4 py-5 sm:px-6'>
@@ -16,3 +19,5 @@ export default function Card({ title, description, children }: CardProps) {
     </div>
   )
 }
+
+export default memo(Card)

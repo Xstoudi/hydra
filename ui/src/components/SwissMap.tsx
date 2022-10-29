@@ -1,10 +1,11 @@
+import { memo } from 'react'
 import { MapContainer, TileLayer } from 'react-leaflet'
 
 interface SwissMapProps {
   children?: React.ReactNode
 }
 
-export default function SwissMap({ children }: SwissMapProps) {
+function SwissMap({ children }: SwissMapProps) {
   return (
     <MapContainer
       center={[46.798333, 8.231944]}
@@ -21,3 +22,5 @@ export default function SwissMap({ children }: SwissMapProps) {
     </MapContainer>
   )
 }
+
+export default memo(SwissMap)

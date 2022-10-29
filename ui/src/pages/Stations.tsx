@@ -9,7 +9,6 @@ export default function Stations() {
   const query = useQuery(['stations'], getStations)
 
   const [bounds, setBounds] = useState<L.LatLngBounds | null>(null)
-  console.log(bounds)
 
   const stations = useMemo(
     () => query.data

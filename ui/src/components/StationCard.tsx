@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import Card from './Card'
 import CardStat from './CardStat'
 
@@ -5,7 +6,7 @@ interface StationCardProps {
   station: StationData
 }
 
-export default function StationCard({ station }: StationCardProps) {
+function StationCard({ station }: StationCardProps) {
   return (
     <Card title={station.name} description={station.water_body_name}>
       <div className='flex flex-col grow justify-center gap-4'>
@@ -24,3 +25,5 @@ export default function StationCard({ station }: StationCardProps) {
     </Card>
   )
 }
+
+export default memo(StationCard)

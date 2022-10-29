@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { memo, useCallback } from 'react'
 import { Marker, useMap, useMapEvents } from 'react-leaflet'
 
 interface StationsLayerProps {
@@ -6,7 +6,7 @@ interface StationsLayerProps {
   updateBounds: (bounds: L.LatLngBounds) => void
 }
 
-export default function StationsLayer({ stations, updateBounds }: StationsLayerProps) {
+function StationsLayer({ stations, updateBounds }: StationsLayerProps) {
 
   const map = useMap() 
 
@@ -27,3 +27,5 @@ export default function StationsLayer({ stations, updateBounds }: StationsLayerP
     }
   </>
 }
+
+export default memo(StationsLayer)

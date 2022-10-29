@@ -1,19 +1,11 @@
+import { memo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
 import LangSelector from './LangSelector'
 
-export default function Hero() {
+function Hero() {
   const { t } = useTranslation('home')
-
-  navigator.geolocation.getCurrentPosition(
-    position => {
-      console.log(position)
-    },
-    error => {
-      console.log(error)
-    }
-  )
 
   return (
     <header className=' bg-hero-background bg-cover bg-center'>
@@ -30,3 +22,5 @@ export default function Hero() {
     </header>
   )
 }
+
+export default memo(Hero)
