@@ -1,37 +1,50 @@
-import { useCallback, useContext, useState } from 'react'
+import { useCallback, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { AlertContext } from '../components/alerts/AlertProvider'
+import { toast } from 'react-toastify'
+import { PositionContext } from '../contexts/PositionContext'
 
 export default function usePosition() {
-  const [position, setPosition] = useState<GeolocationCoordinates | null>(null)
-  const [error, setError] = useState<string | null>(null)
+  const { position, setPosition } = useContext(PositionContext)
   const [requesting, setRequesting] = useState(false)
-
-  const { alert } = useContext(AlertContext)
-
   const { t } = useTranslation('stations')
-
   const locate = useCallback(() => {
-    const geolocation = navigator.geolocation
-    if(geolocation === undefined) {
-      alert(t('geolocation.errors.unsupported'), 'error')
+    setRequesting(true)
+  }, [setRequesting])
+
+  const onChange = ({ coords }: GeolocationPosition) => {
+    setPosition({
+      accuracy: coords.accuracy,
+      altitude: coords.altitude,
+      altitudeAccuracy: coords.altitudeAccuracy,
+      heading: coords.heading,
+      latitude: coords.latitude,
+      longitude: coords.longitude,
+      speed: coords.speed,
+    })
+    setRequesting(false)
+  }
+
+  const onError = () => {
+    toast.error(t('geolocation.errors.generic'))
+    setRequesting(false)
+    setPosition(null)
+  }
+
+  useEffect(() => {
+    if (requesting === false) {
       return
     }
 
-    setRequesting(true)
+    const geolocation = navigator.geolocation
+    if(geolocation === undefined) {
+      toast.error(t('geolocation.errors.unsupported'))
+      return
+    }
 
-    geolocation.getCurrentPosition(
-      (position: GeolocationPosition) => {
-        setPosition(position.coords)
-        setRequesting(false)
-      },
-      () => {
-        setPosition(null)
-        alert(t('geolocation.errors.generic'), 'error')
-        setRequesting(false)
-      }
-    )
-  }, [setPosition, setRequesting, setError])
+    geolocation.getCurrentPosition(onChange, onError)
+  }, [requesting])
 
-  return { position, error, locate, requesting }
+  5
+
+  return { position, locate, requesting }
 }

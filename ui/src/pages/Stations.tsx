@@ -5,9 +5,11 @@ import StationCard from '../components/StationCard'
 import { getStations } from '../services/stations'
 import StationsLayer from '../components/StationsLayer'
 import LocateButton from '../components/LocateButton'
+import usePosition from '../hooks/use-position'
 
 export default function Stations() {
-  const query = useQuery(['stations'], getStations)
+  const { position } = usePosition()
+  const query = useQuery(['stations', position?.latitude, position?.longitude], () => getStations(position), { keepPreviousData: true })
 
   const [bounds, setBounds] = useState<L.LatLngBounds | null>(null)
 
