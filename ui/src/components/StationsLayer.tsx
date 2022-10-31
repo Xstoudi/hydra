@@ -1,23 +1,24 @@
-import { memo, useCallback } from 'react'
+import { memo, useEffect } from 'react'
 import { Marker, useMap, useMapEvents } from 'react-leaflet'
+import { centerPosition } from './SwissMap'
 
 interface StationsLayerProps {
   stations: StationData[]
   updateBounds: (bounds: L.LatLngBounds) => void
+  wantedPosition: [number, number]
 }
 
-function StationsLayer({ stations, updateBounds }: StationsLayerProps) {
-
+function StationsLayer({ stations, updateBounds, wantedPosition }: StationsLayerProps) {
   const map = useMap() 
 
-  const handleBoundsChange = useCallback(() => {
-    updateBounds(map.getBounds())
-  }, [map, updateBounds])
-
   useMapEvents({
-    zoomend: handleBoundsChange,
-    moveend: handleBoundsChange
+    zoomend: () => updateBounds(map.getBounds()),
+    moveend: () => updateBounds(map.getBounds()),
   })
+
+  useEffect(() => {
+    map.flyTo(wantedPosition, wantedPosition === centerPosition ? 9 : 12)
+  }, [wantedPosition])
 
   return <>
     {

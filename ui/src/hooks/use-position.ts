@@ -44,7 +44,5 @@ export default function usePosition() {
     geolocation.getCurrentPosition(onChange, onError)
   }, [requesting])
 
-  5
-
   return { position, locate, requesting }
 }

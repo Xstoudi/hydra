@@ -5,10 +5,12 @@ interface SwissMapProps {
   children?: React.ReactNode
 }
 
+export const centerPosition: [number, number] = [46.798333, 8.231944]
+
 function SwissMap({ children }: SwissMapProps) {
   return (
     <MapContainer
-      center={[46.798333, 8.231944]}
+      center={centerPosition}
       zoom={9}
       scrollWheelZoom={false}
       style={{ height: 'calc(100vh - 82px)' }}

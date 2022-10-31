@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { useMemo, useState } from 'react'
-import SwissMap from '../components/SwissMap'
+import SwissMap, { centerPosition } from '../components/SwissMap'
 import StationCard from '../components/StationCard'
 import { getStations } from '../services/stations'
 import StationsLayer from '../components/StationsLayer'
@@ -26,10 +26,21 @@ export default function Stations() {
     [query.data, bounds]
   )
 
+  const wantedPosition: [number, number] = useMemo(
+    () => position === null 
+      ? centerPosition
+      : [position.latitude, position.longitude]
+    , [position]
+  )
+
   return (
     <div className='gap-8 flex flex-col '>
       <SwissMap>
-        <StationsLayer stations={stations} updateBounds={setBounds} />
+        <StationsLayer
+          stations={stations}
+          updateBounds={setBounds}
+          wantedPosition={wantedPosition}
+        />
       </SwissMap>
       <div className='mx-auto grid w-5/6 grid-cols-1 gap-8 sm:grid-cols-2 md:w-2/3 lg:w-4/5 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-5'>
         {
