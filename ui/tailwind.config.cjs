@@ -15,6 +15,9 @@ module.exports = {
       },
       backgroundImage: {
         "hero-background": "url('/hero-background.jpg')",
+      },
+      animation: {
+        'spinner-grow': 'spinner-grow 1s linear infinite',
       }
     },
   },

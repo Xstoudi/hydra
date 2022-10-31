@@ -10,6 +10,7 @@ import './utils/i18n'
 
 import './index.css'
 import 'leaflet/dist/leaflet.css'
+import AlertProvider from './components/alerts/AlertProvider'
 
 const queryClient = new QueryClient()
 
@@ -17,7 +18,9 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
-        <App />
+        <AlertProvider>
+          <App />
+        </AlertProvider>
       </QueryClientProvider>
     </BrowserRouter>
   </React.StrictMode>

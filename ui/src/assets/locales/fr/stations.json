@@ -1,0 +1,9 @@
+{
+  "station": "Station",
+  "geolocation": {
+    "errors": {
+      "unsupported": "Géolocalisation non supportée par votre appareil.",
+      "generic": "Une erreur est survenue en essayant de déterminer votre position."
+    }
+  }
+}

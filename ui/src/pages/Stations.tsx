@@ -4,6 +4,7 @@ import SwissMap from '../components/SwissMap'
 import StationCard from '../components/StationCard'
 import { getStations } from '../services/stations'
 import StationsLayer from '../components/StationsLayer'
+import LocateButton from '../components/LocateButton'
 
 export default function Stations() {
   const query = useQuery(['stations'], getStations)
@@ -35,6 +36,7 @@ export default function Stations() {
           ))
         }
       </div>
+      <LocateButton />
     </div>
   )
 }
