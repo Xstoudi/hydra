@@ -6,7 +6,7 @@ import Twemoji from './Twemoji'
 
 function LocateButton() {
 
-  const { locate, requesting, position } = usePosition()
+  const { locate, requesting } = usePosition()
 
   return (
     <button className='hover:cursor-pointer justify-center items-center bg-sky-300 rounded-full fixed z-50 right-6 bottom-6 w-12 h-12 flex drop-shadow-md' onClick={locate}>
