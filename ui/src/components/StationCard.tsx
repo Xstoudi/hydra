@@ -17,7 +17,7 @@ function StationCard({ station }: StationCardProps) {
         }
         {
           station.meta.discharge !== null && (
-            <CardStat emoji='💦' value={station.meta.discharge} unit='m3/s' />
+            <CardStat emoji='💦' value={station.meta.discharge} unit='m&sup3;/s' />
           )
         }
         {station.meta.level !== null && <CardStat emoji='📏' value={station.meta.level} unit='m' />}
