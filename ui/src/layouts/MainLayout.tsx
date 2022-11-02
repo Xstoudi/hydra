@@ -1,4 +1,5 @@
 import { memo } from 'react'
+import Footer from '../components/Footer'
 import Header from '../components/Header'
 
 interface MainLayoutProps {
@@ -10,6 +11,7 @@ function MainLayout({ children }: MainLayoutProps) {
     <div className='flex flex-col text-slate-900'>
       <Header />
       {children}
+      <Footer />
     </div>
   )
 }

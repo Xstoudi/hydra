@@ -34,7 +34,7 @@ export default function Stations() {
   )
 
   return (
-    <div className='gap-8 flex flex-col '>
+    <div className='gap-8 flex flex-col'>
       <SwissMap>
         <StationsLayer
           stations={stations}
