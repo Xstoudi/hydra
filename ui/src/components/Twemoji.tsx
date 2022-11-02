@@ -7,15 +7,17 @@ type TwemojiSize = 'lg' | 'md' | 'sm'
 interface TwemojiProps {
   emoji: string
   size?: TwemojiSize
+  className?: string
 }
 
-function Twemoji({ emoji, size = 'md' }: TwemojiProps) {
+function Twemoji({ emoji, size = 'md', className }: TwemojiProps) {
   return (
     <div className={
       clsx(
         size === 'lg' && 'h-10 w-10',
         size === 'md' && 'h-8 w-8',
-        size === 'sm' && 'h-6 w-6'
+        size === 'sm' && 'h-6 w-6',
+        className
       ) 
     }>
       <span

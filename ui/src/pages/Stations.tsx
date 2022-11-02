@@ -6,31 +6,31 @@ import { getStations } from '../services/stations'
 import StationsLayer from '../components/StationsLayer'
 import LocateButton from '../components/LocateButton'
 import usePosition from '../hooks/use-position'
+import Spinner from '../components/Spinner'
 
 export default function Stations() {
   const { position } = usePosition()
-  const query = useQuery(['stations', position?.latitude, position?.longitude], () => getStations(position), { keepPreviousData: true })
+  const { data: stationsData, isLoading: areStationsLoading, isError } = useQuery(['stations', position?.latitude, position?.longitude], () => getStations(position), { keepPreviousData: true })
 
   const [bounds, setBounds] = useState<L.LatLngBounds | null>(null)
 
   const stations = useMemo(
-    () => query.data
+    () => stationsData
       ?.filter(station => 
         Object.keys(station.meta).find(metaKey => station.meta[metaKey] !== null) !== undefined
       )
+      || [],
+    [stationsData]
+  )
+
+  const shownStations = useMemo(
+    () => stations
       .filter(stations => 
         bounds === null 
         || bounds.contains([stations.coordinates.latitude, stations.coordinates.longitude])
       )
       || [],
-    [query.data, bounds]
-  )
-
-  const wantedPosition: [number, number] = useMemo(
-    () => position === null 
-      ? centerPosition
-      : [position.latitude, position.longitude]
-    , [position]
+    [stations, bounds]
   )
 
   return (
@@ -39,12 +39,17 @@ export default function Stations() {
         <StationsLayer
           stations={stations}
           updateBounds={setBounds}
-          wantedPosition={wantedPosition}
+          wantedPosition={position === null ? centerPosition : [position.latitude, position.longitude]}
         />
       </SwissMap>
+      {
+        areStationsLoading && (
+          <Spinner />
+        )
+      }
       <div className='mx-auto grid w-5/6 grid-cols-1 gap-8 sm:grid-cols-2 md:w-2/3 lg:w-4/5 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-5'>
         {
-          stations?.map(station => (
+          shownStations.map(station => (
             <StationCard key={station.id} station={station} />
           ))
         }
