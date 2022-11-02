@@ -4,7 +4,7 @@ import LangSelector from './LangSelector'
 export default function Footer() {
   return (
     <div className='mx-8 mt-8 border-t-2 border-gray-100 bg-white py-8'>
-      <div className='mx-16 grid grid-rows-3 md:grid-rows-none md:grid-cols-2 md:gap-8 lg:gap-16 xl:grid-cols-3 justify-between gap-4'>
+      <div className='mx-16 grid grid-rows-3 md:grid-rows-none md:grid-cols-2 md:gap-8 lg:gap-16 xl:grid-cols-3 2xl:mx-72 justify-between gap-4'>
         <div className='flex flex-col'>
             <h3 className='text-2xl'>Sources</h3>
             <p>
