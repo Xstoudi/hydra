@@ -16,8 +16,12 @@ const api = axios.create({
 api.interceptors.response.use(
   (response) => response, 
   (error) => {
-    const messages: string[] = error.response.data.errors.map((error: ValidationError) => error.message)
-    messages.forEach(message => toast.error(t(message as unknown as TemplateStringsArray)))
+    if(error.response?.data !== undefined) {
+      const messages: string[] = error.response.data.errors.map((error: ValidationError) => error.message)
+      messages.forEach(message => toast.error(t(message as unknown as TemplateStringsArray)))
+    } else {
+      toast.error(t('common:errors.fetch'))
+    }
     return error
   })
 

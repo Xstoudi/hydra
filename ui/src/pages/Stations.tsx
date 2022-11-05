@@ -24,12 +24,7 @@ export default function Stations() {
       || [],
     [stationsData]
   )
-
-  const { t } = useTranslation('stations')
-
-  useEffect(() => {
-  }, [error, isError])
-
+ 
   const shownStations = useMemo(
     () => stations
       .filter(stations => 
