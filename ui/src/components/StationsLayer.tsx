@@ -1,7 +1,7 @@
 import { DivIcon } from 'leaflet'
 import { memo, useEffect } from 'react'
 import { Marker, useMap, useMapEvents } from 'react-leaflet'
-import { renderToString } from "react-dom/server";
+import { renderToString } from 'react-dom/server'
 
 import { centerPosition } from './SwissMap'
 import Twemoji from './Twemoji'

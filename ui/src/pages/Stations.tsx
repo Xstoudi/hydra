@@ -10,7 +10,7 @@ import Spinner from '../components/Spinner'
 
 export default function Stations() {
   const { position } = usePosition()
-  const { data: stationsData, isLoading: areStationsLoading, isError } = useQuery(['stations', position?.latitude, position?.longitude], () => getStations(position), { keepPreviousData: true })
+  const { data: stationsData, isLoading: areStationsLoading } = useQuery(['stations', position?.latitude, position?.longitude], () => getStations(position), { keepPreviousData: true })
 
   const [bounds, setBounds] = useState<L.LatLngBounds | null>(null)
 
