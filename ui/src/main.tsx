@@ -15,7 +15,7 @@ import PositionProvider from './contexts/PositionContext'
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 1000 * 60,
+      staleTime: 1000 * 60 * 10,
     }
   }
 })
