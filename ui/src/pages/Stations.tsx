@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import SwissMap, { centerPosition } from '../components/SwissMap'
 import StationCard from '../components/StationCard'
 import { getStations } from '../services/stations'
@@ -7,12 +7,11 @@ import StationsLayer from '../components/StationsLayer'
 import LocateButton from '../components/LocateButton'
 import usePosition from '../hooks/use-position'
 import Spinner from '../components/Spinner'
-import { useTranslation } from 'react-i18next'
 
 
 export default function Stations() {
   const { position } = usePosition()
-  const { data: stationsData, isLoading: areStationsLoading, isError, error } = useQuery(['stations', position?.latitude, position?.longitude], () => getStations(position), { keepPreviousData: true })
+  const { data: stationsData, isLoading: areStationsLoading } = useQuery(['stations', position?.latitude, position?.longitude], () => getStations(position), { keepPreviousData: true })
 
   const [bounds, setBounds] = useState<L.LatLngBounds | null>(null)
 

@@ -12,7 +12,13 @@ import './index.css'
 import 'leaflet/dist/leaflet.css'
 import PositionProvider from './contexts/PositionContext'
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60,
+    }
+  }
+})
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
