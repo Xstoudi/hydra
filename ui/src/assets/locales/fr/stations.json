@@ -5,6 +5,11 @@
     "geolocation": {
       "unsupported": "Géolocalisation non supportée par votre appareil.",
       "generic": "Une erreur est survenue en essayant de déterminer votre position."
+    },
+    "validation": {
+      "required": "La latitude et la longitude sont requises.",
+      "lat-range": "La latitude doit être comprise entre -90 et 90.",
+      "lon-range": "La longitude doit être comprise entre -180 et 180."
     }
   }
 }

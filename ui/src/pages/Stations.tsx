@@ -7,12 +7,12 @@ import StationsLayer from '../components/StationsLayer'
 import LocateButton from '../components/LocateButton'
 import usePosition from '../hooks/use-position'
 import Spinner from '../components/Spinner'
-import { toast } from 'react-toastify'
 import { useTranslation } from 'react-i18next'
+
 
 export default function Stations() {
   const { position } = usePosition()
-  const { data: stationsData, isLoading: areStationsLoading, isError } = useQuery(['stations', position?.latitude, position?.longitude], () => getStations(position), { keepPreviousData: true })
+  const { data: stationsData, isLoading: areStationsLoading, isError, error } = useQuery(['stations', position?.latitude, position?.longitude], () => getStations(position), { keepPreviousData: true })
 
   const [bounds, setBounds] = useState<L.LatLngBounds | null>(null)
 
@@ -28,10 +28,7 @@ export default function Stations() {
   const { t } = useTranslation('stations')
 
   useEffect(() => {
-    if(isError) {
-      toast(t('errors.fetch'), { type: 'error' })
-    }
-  }, [isError])
+  }, [error, isError])
 
   const shownStations = useMemo(
     () => stations
