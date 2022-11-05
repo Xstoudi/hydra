@@ -1,7 +1,8 @@
 {
   "station": "Station",
-  "geolocation": {
-    "errors": {
+  "errors": {
+    "fetch": "An error occured while fetching the stations. Please try again later.",
+    "geolocation": {
       "unsupported": "Geolocation is not supported on your device.",
       "generic": "An error happened while trying to get your location"
     }

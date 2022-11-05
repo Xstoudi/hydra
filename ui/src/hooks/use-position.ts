@@ -25,7 +25,7 @@ export default function usePosition() {
   }
 
   const onError = () => {
-    toast.error(t('geolocation.errors.generic'))
+    toast.error(t('errors.geolocation.generic'))
     setRequesting(false)
     setPosition(null)
   }
@@ -37,7 +37,7 @@ export default function usePosition() {
 
     const geolocation = navigator.geolocation
     if(geolocation === undefined) {
-      toast.error(t('geolocation.errors.unsupported'))
+      toast.error(t('errors.geolocation.unsupported'))
       return
     }
 

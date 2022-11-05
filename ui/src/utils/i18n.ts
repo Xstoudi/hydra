@@ -12,7 +12,6 @@ export const resources = {
   en: {
     home: enHome,
     stations: enStations,
-
   },
   fr: {
     home: frHome,
