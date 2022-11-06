@@ -7,8 +7,6 @@ import StationsLayer from '../components/StationsLayer'
 import LocateButton from '../components/LocateButton'
 import usePosition from '../hooks/use-position'
 import Spinner from '../components/Spinner'
-import MapEvents from '../components/MapEvents'
-
 
 export default function Stations() {
   const { position } = usePosition()
