@@ -33,7 +33,7 @@ export default function Stations() {
     [stations, bounds]
   )
 
-  const wantedPosition = useMemo(
+  const wantedPosition: [number, number] = useMemo(
     () => position === null ? centerPosition : [position.latitude, position.longitude],
     [position]
   )

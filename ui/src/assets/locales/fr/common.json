@@ -1,3 +1,13 @@
 {
-  "fetch": "Une erreur est survenue lors de la récupération des stations. Veuillez réessayer ultérieurement."
+  "errors": {
+    "fetch": "Une erreur est survenue lors de la récupération des stations. Veuillez réessayer ultérieurement."
+  },
+  "layout": {
+    "sources": "Sources",
+    "sources-info": "Les données sont celles de l'<0>OFEV</0> via <1>SwissHydroApi</1>.",
+    "contact": "Contact",
+    "contact-info": "Si vous avez besoin de contacter le mainteneur de cette application, merci de le contacter à l'adresse <0>xavier@stouder.io</0>.",
+    "about": "À propos",
+    "about-info": "Cette application est un projet open source, vous pouvez trouver le code source sur <0>GitHub</0>. Hydra a été créé pendant mes études à la <1>HE Arc</1>."
+  }
 }
