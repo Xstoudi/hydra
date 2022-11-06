@@ -18,7 +18,7 @@ const icon = new DivIcon({
 })
 
 function StationsLayer({ stations, updateBounds, wantedPosition }: StationsLayerProps) {
-  const map = useMap() 
+  const map = useMap()
 
   useMapEvents({
     zoomend: () => updateBounds(map.getBounds()),

@@ -7,6 +7,7 @@ import StationsLayer from '../components/StationsLayer'
 import LocateButton from '../components/LocateButton'
 import usePosition from '../hooks/use-position'
 import Spinner from '../components/Spinner'
+import MapEvents from '../components/MapEvents'
 
 
 export default function Stations() {
@@ -34,13 +35,18 @@ export default function Stations() {
     [stations, bounds]
   )
 
+  const wantedPosition = useMemo(
+    () => position === null ? centerPosition : [position.latitude, position.longitude],
+    [position]
+  )
+
   return (
     <div className='gap-8 flex flex-col'>
       <SwissMap>
         <StationsLayer
           stations={stations}
           updateBounds={setBounds}
-          wantedPosition={position === null ? centerPosition : [position.latitude, position.longitude]}
+          wantedPosition={wantedPosition}
         />
       </SwissMap>
       {
