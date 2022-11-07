@@ -8,7 +8,7 @@ interface MainLayoutProps {
 
 function MainLayout({ children }: MainLayoutProps) {
   return (
-    <div className='flex flex-col gap-4 text-slate-900'>
+    <div className='flex flex-col text-slate-900'>
       <Header />
       {children}
       <Footer />

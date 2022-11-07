@@ -3,7 +3,7 @@ import { memo, useEffect } from 'react'
 import { Marker, useMap, useMapEvents } from 'react-leaflet'
 import { renderToString } from 'react-dom/server'
 
-import { centerPosition } from './SwissMap'
+import { swissCenterPosition } from './SwissMap'
 import Twemoji from './Twemoji'
 
 interface StationsLayerProps {
@@ -26,7 +26,7 @@ function StationsLayer({ stations, updateBounds, wantedPosition }: StationsLayer
   })
 
   useEffect(() => {
-    map.flyTo(wantedPosition, wantedPosition === centerPosition ? 9 : 12)
+    map.flyTo(wantedPosition, wantedPosition === swissCenterPosition ? 9 : 12)
   }, [wantedPosition])
 
   return <>

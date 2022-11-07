@@ -6,6 +6,7 @@ import Home from './pages/Home'
 import Stations from './pages/Stations'
 
 import 'react-toastify/dist/ReactToastify.css'
+import Station from './pages/Station'
 
 function App() {
   return (
@@ -20,6 +21,11 @@ function App() {
             </MainLayout>
           }
         />
+        <Route path='/stations/:id' element={
+          <MainLayout>
+            <Station />
+          </MainLayout>
+        } />
       </Routes>
       <ToastContainer />
     </>
