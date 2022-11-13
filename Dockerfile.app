@@ -29,3 +29,8 @@ ENV PORT=$PORT
 ENV HOST=0.0.0.0
 COPY --chown=node:node ./package*.json ./
 RUN ls
+RUN npm ci --omit=dev
+COPY --chown=node:node --from=build_back /home/node/app/build .
+COPY --chown=node:node --from=build_frontend /home/node/app/public ./ui/dist
+EXPOSE $PORT
+CMD [ "dumb-init", "node", "server.js" ]
