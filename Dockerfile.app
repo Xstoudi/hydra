@@ -19,6 +19,7 @@ RUN npm ci
 COPY --chown=node:node . .
 
 FROM dependencies_front AS build_frontend
+WORKDIR /home/node/app/ui
 RUN npm run build
 
 FROM dependencies_back AS build_back
