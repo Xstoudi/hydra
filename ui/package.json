@@ -7,8 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint . --ext .ts,.tsx",
-    "rules": "eslint --print-config src/main.tsx > test.txt"
+    "lint": "eslint . --ext .ts,.tsx"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.3",

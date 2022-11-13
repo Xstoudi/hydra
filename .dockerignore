@@ -5,7 +5,7 @@ coverage
 .DS_STORE
 .env
 tmp
-
+.vscode
 Dockerfile*
 docker-compose*
 .dockerignore
