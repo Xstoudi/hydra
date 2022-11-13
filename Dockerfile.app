@@ -14,7 +14,7 @@ COPY --chown=node:node . .
 
 FROM base AS dependencies_front
 WORKDIR /home/node/app/ui
-COPY --chown=node:node ./package*.json ./
+COPY --chown=node:node ./ui/package*.json ./
 RUN npm ci
 COPY --chown=node:node . .
 
