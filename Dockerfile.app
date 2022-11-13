@@ -13,17 +13,12 @@ RUN npm ci
 COPY --chown=node:node . .
 
 FROM base AS dependencies_front
-WORKDIR /home/node/app/ui
-RUN ls
-COPY --chown=node:node ./package*.json ./
+COPY --chown=node:node ./ui/package*.json ./
 RUN cat package.json
 RUN npm ci
 COPY --chown=node:node . .
 
 FROM dependencies_front AS build_frontend
-RUN ls
-WORKDIR /home/node/app/ui
-RUN ls
 RUN npm run build
 
 FROM dependencies_back AS build_back
@@ -38,7 +33,7 @@ RUN npm ci --omit=dev
 RUN ls
 COPY --chown=node:node --from=build_back /home/node/app/build .
 RUN ls
-COPY --chown=node:node --from=build_frontend /home/node/app/public ./dist
+COPY --chown=node:node --from=build_frontend /home/node/app/ui/dist ./public
 RUN ls
 EXPOSE $PORT
 CMD [ "dumb-init", "node", "server.js" ]
