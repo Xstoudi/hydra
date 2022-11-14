@@ -2,8 +2,6 @@ import Application from '@ioc:Adonis/Core/Application'
 import Route from '@ioc:Adonis/Core/Route'
 import { readFile } from 'node:fs/promises'
 
-const staticViewPromise = readFile(Application.publicPath('index.html'), 'utf-8')
-
 Route.group(() => {
   Route.get('/stations', 'StationsController.stations').as('stations')
   Route.get('/stations/:id', 'StationsController.station').as('station')
@@ -12,6 +10,10 @@ Route.group(() => {
   .prefix('/api')
   .where('id', Route.matchers.number())
 
-Route.get('*', () => {
-  return staticViewPromise
-})
+if (!Application.inDev) {
+  const staticViewPromise = readFile(Application.publicPath('index.html'), 'utf-8')
+
+  Route.get('*', () => {
+    return staticViewPromise
+  })
+}
