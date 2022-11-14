@@ -8,8 +8,8 @@ import Twemoji from './Twemoji'
 
 interface StationsLayerProps {
   stations: StationData[]
-  updateBounds: (bounds: L.LatLngBounds) => void
-  wantedPosition: [number, number]
+  updateBounds?: (bounds: L.LatLngBounds) => void
+  wantedPosition?: [number, number]
 }
 
 const icon = new DivIcon({
@@ -21,12 +21,14 @@ function StationsLayer({ stations, updateBounds, wantedPosition }: StationsLayer
   const map = useMap()
 
   useMapEvents({
-    zoomend: () => updateBounds(map.getBounds()),
-    moveend: () => updateBounds(map.getBounds()),
+    zoomend: () => updateBounds !== undefined && updateBounds(map.getBounds()),
+    moveend: () => updateBounds !== undefined && updateBounds(map.getBounds()),
   })
 
   useEffect(() => {
-    map.flyTo(wantedPosition, wantedPosition === swissCenterPosition ? 9 : 12)
+    if (wantedPosition !== undefined) {
+      map.flyTo(wantedPosition, wantedPosition === swissCenterPosition ? 9 : 12)
+    }
   }, [wantedPosition])
 
   return <>

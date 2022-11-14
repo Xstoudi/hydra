@@ -9,5 +9,6 @@ type StationData = {
     temperature: number | null
     discharge: number | null
     level: number | null
+    last_measured_at: string
   }
 }

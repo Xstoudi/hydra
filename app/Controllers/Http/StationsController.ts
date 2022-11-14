@@ -20,7 +20,10 @@ export default class StationsController {
   }
 
   public async station({ request }: HttpContextContract) {
-    return Station.findOrFail(request.param('id'))
+    return Station.query()
+      .where('id', request.param('id'))
+      .withScopes((scopes) => scopes.withStats())
+      .firstOrFail()
   }
 
   public async measures({ request }: HttpContextContract) {

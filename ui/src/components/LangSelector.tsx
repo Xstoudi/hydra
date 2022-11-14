@@ -4,15 +4,14 @@ import { Listbox, Transition } from '@headlessui/react'
 import { Fragment, memo, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-
+export const LANGUAGES = [
+  { id: 0, name: 'Français', key: 'fr', emoji: '🇫🇷' },
+  { id: 1, name: 'English', key: 'en', emoji: '🇬🇧' },
+]
 
 function LangSelector() {
-  const langs = [
-    { id: 0, name: 'Français', key: 'fr', emoji: '🇫🇷' },
-    { id: 1, name: 'English', key: 'en', emoji: '🇬🇧' },
-  ]
   const { i18n } = useTranslation()
-  const [selectedLang, setSelectedLang] = useState(langs.find(lang => lang.key === i18n.language) || langs[0])
+  const [selectedLang, setSelectedLang] = useState(LANGUAGES.find(lang => lang.key === i18n.language) || LANGUAGES[0])
 
   useEffect(() => {
     i18n.changeLanguage(selectedLang.key)
@@ -31,7 +30,7 @@ function LangSelector() {
         <Transition as={Fragment} leave='transition ease-in duration-100' leaveFrom='opacity-100' leaveTo='opacity-0'>
           <Listbox.Options className='absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm'>
             {
-              langs.map((lang, langIndex) => (
+              LANGUAGES.map((lang, langIndex) => (
                 <Listbox.Option
                   key={langIndex}
                   className={

@@ -82,16 +82,25 @@ export default class Station extends BaseModel {
   })
 
   public static withStats = scope((query: StationQuery) => {
-    query.select(
-      ...['temperature', 'discharge', 'level'].map((field) =>
+    query
+      .select(
+        ...['temperature', 'discharge', 'level'].map((field) =>
+          Database.from('measures')
+            .select('value')
+            .where('type', field)
+            .andWhere('station_id', Database.raw('stations.id'))
+            .orderBy('measured_at', 'desc')
+            .limit(1)
+            .as(field)
+        )
+      )
+      .select(
         Database.from('measures')
-          .select('value')
-          .where('type', field)
-          .andWhere('station_id', Database.raw('stations.id'))
+          .select('measured_at')
+          .where('station_id', Database.raw('stations.id'))
           .orderBy('measured_at', 'desc')
           .limit(1)
-          .as(field)
+          .as('last_measured_at')
       )
-    )
   })
 }

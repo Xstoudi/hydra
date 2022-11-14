@@ -1,5 +1,14 @@
 {
   "station": "Station",
+  "last_update": "Last update",
+  "water_body_type": {
+    "river": "River",
+    "lake": "Lake",
+    "well": "Well",
+    "groundwater": "Groundwater",
+    "piezometer": "Piezometer",
+    "spring": "Spring"
+  },
   "errors": {
     "geolocation": {
       "unsupported": "Geolocation is not supported on your device.",

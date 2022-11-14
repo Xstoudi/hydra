@@ -19,7 +19,7 @@ module.exports = {
       animation: {
         'spinner-grow': 'spinner-grow 1s linear infinite',
       },
-      spacing: {
+      minHeight: {
         'screen-wo-header': 'calc(100vh - 8rem)',
       }
     },
