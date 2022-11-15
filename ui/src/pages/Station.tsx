@@ -4,7 +4,7 @@ import StationLoadingSkeleton from '../components/StationLoadingSkeleton'
 import useDebounce from '../hooks/use-debounce'
 import { getStation } from '../services/stations'
 import StationInfos from '../components/StationInfos'
-import { ResponsiveContainer, LineChart, CartesianGrid } from 'recharts'
+import StationCharts from '../components/StationCharts'
 
 export default function Station() {
 
@@ -27,12 +27,7 @@ export default function Station() {
             <>
               <StationInfos station={stationData} />
               <hr />
-              <ResponsiveContainer width='95%' height={400}>
-                <LineChart>
-                  <CartesianGrid strokeDasharray='3 3' />
-
-                </LineChart>
-              </ResponsiveContainer>
+              <StationCharts stationId={id} />
             </>
           )
         }

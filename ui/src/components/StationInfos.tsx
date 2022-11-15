@@ -15,11 +15,12 @@ interface StationInfosProps {
 
 export default function StationInfos({ station }: StationInfosProps) {
   const stationPosition: [number, number] = useMemo(
-    () => [station.coordinates.latitude, station.coordinates.longitude],
+    () => [station?.coordinates.latitude, station?.coordinates.longitude],
     [station]
   )
 
   const { i18n, t } = useTranslation('stations')
+
   const langKey = useMemo(
     () => LANGUAGES.find(lang => lang.key === i18n.language) || LANGUAGES[0],
     [i18n.language]
