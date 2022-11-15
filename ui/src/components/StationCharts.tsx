@@ -2,10 +2,9 @@ import { useQuery } from '@tanstack/react-query'
 import sortBy from 'lodash/sortBy'
 import groupBy from 'lodash/groupBy'
 import { useMemo } from 'react'
-import { ResponsiveContainer, LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Line, Brush } from 'recharts'
+import { ResponsiveContainer, LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Line } from 'recharts'
 import { getMeasures } from '../services/measures'
 import { DateTime } from 'luxon'
-import { AxisInterval } from 'recharts/types/util/types'
 import Spinner from './Spinner'
 
 interface StationChartsProps {
@@ -19,7 +18,7 @@ const chartsConfig = {
   height: 400,
   xAxis: {
     minTickGap: 30,
-    interval: 'preserveEnd',
+    interval: 'preserveEnd' as const,
     tickFormatter: (x: string) => DateTime.fromISO(x).toLocaleString(DateTime.DATETIME_SHORT)
   },
   yAxis: {
@@ -63,7 +62,7 @@ export default function StationCharts({ stationId }: StationChartsProps) {
       <ResponsiveContainer width={chartsWidth} height={chartsConfig.height}>
         <LineChart data={series} syncId='charts'>
           <CartesianGrid strokeDasharray='3 3' />
-          <XAxis dataKey='date' minTickGap={chartsConfig.xAxis.minTickGap} interval={chartsConfig.xAxis.interval as AxisInterval} tickFormatter={chartsConfig.xAxis.tickFormatter} />
+          <XAxis dataKey='date' minTickGap={chartsConfig.xAxis.minTickGap} interval={chartsConfig.xAxis.interval} tickFormatter={chartsConfig.xAxis.tickFormatter} />
           <YAxis />
           <Tooltip />
           <Legend />
@@ -73,7 +72,7 @@ export default function StationCharts({ stationId }: StationChartsProps) {
       <ResponsiveContainer width={chartsWidth} height={chartsConfig.height}>
         <LineChart data={series} syncId='charts'>
           <CartesianGrid strokeDasharray='3 3' />
-          <XAxis dataKey='date' minTickGap={chartsConfig.xAxis.minTickGap} interval={chartsConfig.xAxis.interval as AxisInterval} tickFormatter={chartsConfig.xAxis.tickFormatter} />
+          <XAxis dataKey='date' minTickGap={chartsConfig.xAxis.minTickGap} interval={chartsConfig.xAxis.interval} tickFormatter={chartsConfig.xAxis.tickFormatter} />
           <YAxis yAxisId='left' />
           <YAxis yAxisId='right' orientation='right' type='number' domain={chartsConfig.yAxis.domain} />
           <Tooltip />
