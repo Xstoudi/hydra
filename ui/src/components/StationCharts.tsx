@@ -73,8 +73,8 @@ export default function StationCharts({ stationId }: StationChartsProps) {
             <LineChart data={series} syncId='charts'>
               <CartesianGrid strokeDasharray='3 3' />
               <XAxis dataKey='date' minTickGap={chartsConfig.xAxis.minTickGap} interval={chartsConfig.xAxis.interval} tickFormatter={chartsConfig.xAxis.tickFormatter} />
-              <YAxis />
-              <Tooltip />
+              <YAxis domain={['dataMin', 'dataMax']} unit='°C' />
+              <Tooltip labelFormatter={chartsConfig.xAxis.tickFormatter} />
               <Legend />
               <Line type='monotone' dataKey='temperature' stroke='#8884d8' strokeWidth={chartsConfig.line.strokeWith} dot={chartsConfig.line.dot} connectNulls />
             </LineChart>
@@ -87,8 +87,8 @@ export default function StationCharts({ stationId }: StationChartsProps) {
             <LineChart data={series} syncId='charts'>
               <CartesianGrid strokeDasharray='3 3' />
               <XAxis dataKey='date' minTickGap={chartsConfig.xAxis.minTickGap} interval={chartsConfig.xAxis.interval} tickFormatter={chartsConfig.xAxis.tickFormatter} />
-              <YAxis />
-              <Tooltip />
+              <YAxis domain={['dataMin', 'dataMax']} unit='m&sup3;/s' />
+              <Tooltip labelFormatter={chartsConfig.xAxis.tickFormatter} />
               <Legend />
               <Line type='monotone' dataKey='discharge' stroke='#8884d8' strokeWidth={chartsConfig.line.strokeWith} dot={chartsConfig.line.dot} connectNulls />
             </LineChart>
@@ -101,8 +101,8 @@ export default function StationCharts({ stationId }: StationChartsProps) {
             <LineChart data={series} syncId='charts'>
               <CartesianGrid strokeDasharray='3 3' />
               <XAxis dataKey='date' minTickGap={chartsConfig.xAxis.minTickGap} interval={chartsConfig.xAxis.interval} tickFormatter={chartsConfig.xAxis.tickFormatter} />
-              <YAxis />
-              <Tooltip />
+              <YAxis domain={['dataMin', 'dataMax']} unit='m' />
+              <Tooltip labelFormatter={chartsConfig.xAxis.tickFormatter} />
               <Legend />
               <Line type='monotone' dataKey='level' stroke='#8884d8' strokeWidth={chartsConfig.line.strokeWith} dot={chartsConfig.line.dot} connectNulls />
             </LineChart>
