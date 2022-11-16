@@ -18,7 +18,8 @@ const chartsConfig = {
     tickFormatter: (x: string) => DateTime.fromISO(x).toLocaleString(DateTime.DATETIME_SHORT)
   },
   yAxis: {
-    domain: ['dataMin', 'dataMax']
+    domain: ['dataMin', 'dataMax'],
+    width: 100
   },
   line: {
     strokeWith: 2,
@@ -73,7 +74,7 @@ export default function StationCharts({ stationId }: StationChartsProps) {
             <LineChart data={series} syncId='charts'>
               <CartesianGrid strokeDasharray='3 3' />
               <XAxis dataKey='date' minTickGap={chartsConfig.xAxis.minTickGap} interval={chartsConfig.xAxis.interval} tickFormatter={chartsConfig.xAxis.tickFormatter} />
-              <YAxis domain={['dataMin', 'dataMax']} unit='°C' />
+              <YAxis domain={['dataMin', 'dataMax']} unit='°C' width={chartsConfig.yAxis.width} />
               <Tooltip labelFormatter={chartsConfig.xAxis.tickFormatter} />
               <Legend />
               <Line type='monotone' dataKey='temperature' stroke='#8884d8' strokeWidth={chartsConfig.line.strokeWith} dot={chartsConfig.line.dot} connectNulls />
@@ -87,7 +88,7 @@ export default function StationCharts({ stationId }: StationChartsProps) {
             <LineChart data={series} syncId='charts'>
               <CartesianGrid strokeDasharray='3 3' />
               <XAxis dataKey='date' minTickGap={chartsConfig.xAxis.minTickGap} interval={chartsConfig.xAxis.interval} tickFormatter={chartsConfig.xAxis.tickFormatter} />
-              <YAxis domain={['dataMin', 'dataMax']} unit='m&sup3;/s' />
+              <YAxis domain={['dataMin', 'dataMax']} unit='m&sup3;/s' width={chartsConfig.yAxis.width} />
               <Tooltip labelFormatter={chartsConfig.xAxis.tickFormatter} />
               <Legend />
               <Line type='monotone' dataKey='discharge' stroke='#8884d8' strokeWidth={chartsConfig.line.strokeWith} dot={chartsConfig.line.dot} connectNulls />
@@ -101,7 +102,7 @@ export default function StationCharts({ stationId }: StationChartsProps) {
             <LineChart data={series} syncId='charts'>
               <CartesianGrid strokeDasharray='3 3' />
               <XAxis dataKey='date' minTickGap={chartsConfig.xAxis.minTickGap} interval={chartsConfig.xAxis.interval} tickFormatter={chartsConfig.xAxis.tickFormatter} />
-              <YAxis domain={['dataMin', 'dataMax']} unit='m' />
+              <YAxis domain={['dataMin', 'dataMax']} unit='m' width={chartsConfig.yAxis.width} />
               <Tooltip labelFormatter={chartsConfig.xAxis.tickFormatter} />
               <Legend />
               <Line type='monotone' dataKey='level' stroke='#8884d8' strokeWidth={chartsConfig.line.strokeWith} dot={chartsConfig.line.dot} connectNulls />
