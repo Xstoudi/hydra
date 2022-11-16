@@ -73,12 +73,20 @@ export default function StationCharts({ stationId }: StationChartsProps) {
         <LineChart data={series} syncId='charts'>
           <CartesianGrid strokeDasharray='3 3' />
           <XAxis dataKey='date' minTickGap={chartsConfig.xAxis.minTickGap} interval={chartsConfig.xAxis.interval} tickFormatter={chartsConfig.xAxis.tickFormatter} />
-          <YAxis yAxisId='left' />
-          <YAxis yAxisId='right' orientation='right' type='number' domain={chartsConfig.yAxis.domain} />
+          <YAxis />
           <Tooltip />
           <Legend />
-          <Line yAxisId='left' type='monotone' dataKey='discharge' stroke='#8884d8' strokeWidth={chartsConfig.line.strokeWith} dot={chartsConfig.line.dot} connectNulls />
-          <Line yAxisId='right' type='monotone' dataKey='level' stroke='#82ca9d' strokeWidth={chartsConfig.line.strokeWith} dot={chartsConfig.line.dot} connectNulls />
+          <Line type='monotone' dataKey='discharge' stroke='#8884d8' strokeWidth={chartsConfig.line.strokeWith} dot={chartsConfig.line.dot} connectNulls />
+        </LineChart>
+      </ResponsiveContainer>
+      <ResponsiveContainer width={chartsWidth} height={chartsConfig.height}>
+        <LineChart data={series} syncId='charts'>
+          <CartesianGrid strokeDasharray='3 3' />
+          <XAxis dataKey='date' minTickGap={chartsConfig.xAxis.minTickGap} interval={chartsConfig.xAxis.interval} tickFormatter={chartsConfig.xAxis.tickFormatter} />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Line type='monotone' dataKey='level' stroke='#8884d8' strokeWidth={chartsConfig.line.strokeWith} dot={chartsConfig.line.dot} connectNulls />
         </LineChart>
       </ResponsiveContainer>
     </>
