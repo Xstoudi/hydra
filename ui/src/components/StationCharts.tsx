@@ -7,10 +7,6 @@ import { getMeasures } from '../services/measures'
 import { DateTime } from 'luxon'
 import Spinner from './Spinner'
 
-interface StationChartsProps {
-  stationId?: string
-}
-
 const chartsWidth = '100%'
 
 const chartsConfig = {
@@ -28,6 +24,10 @@ const chartsConfig = {
     strokeWith: 2,
     dot: false
   }
+}
+
+interface StationChartsProps {
+  stationId?: string
 }
 
 export default function StationCharts({ stationId }: StationChartsProps) {
@@ -50,8 +50,16 @@ export default function StationCharts({ stationId }: StationChartsProps) {
       .map(sameDateMeasures => ({
         date: sameDateMeasures[0].measured_at, //DateTime.fromISO(sameDateMeasures[0].measured_at).toUnixInteger(),
         ...Object.fromEntries(sameDateMeasures.map(m => [m.type, m.value]))
-      })), ['date'])
+      })), ['date']) as Serie[]
   }, [seriesData])
+
+  const { hasTemperature, hasDischarge, hasLevel } = useMemo(() => {
+    const hasTemperature = series.some(s => s.temperature !== undefined)
+    const hasDischarge = series.some(s => s.discharge !== undefined)
+    const hasLevel = series.some(s => s.level !== undefined)
+
+    return { hasTemperature, hasDischarge, hasLevel }
+  }, [series])
 
   if(areSeriesLoading) {
     return <Spinner />
@@ -59,36 +67,48 @@ export default function StationCharts({ stationId }: StationChartsProps) {
 
   return (
     <>
-      <ResponsiveContainer width={chartsWidth} height={chartsConfig.height}>
-        <LineChart data={series} syncId='charts'>
-          <CartesianGrid strokeDasharray='3 3' />
-          <XAxis dataKey='date' minTickGap={chartsConfig.xAxis.minTickGap} interval={chartsConfig.xAxis.interval} tickFormatter={chartsConfig.xAxis.tickFormatter} />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Line type='monotone' dataKey='temperature' stroke='#8884d8' strokeWidth={chartsConfig.line.strokeWith} dot={chartsConfig.line.dot} connectNulls />
-        </LineChart>
-      </ResponsiveContainer>
-      <ResponsiveContainer width={chartsWidth} height={chartsConfig.height}>
-        <LineChart data={series} syncId='charts'>
-          <CartesianGrid strokeDasharray='3 3' />
-          <XAxis dataKey='date' minTickGap={chartsConfig.xAxis.minTickGap} interval={chartsConfig.xAxis.interval} tickFormatter={chartsConfig.xAxis.tickFormatter} />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Line type='monotone' dataKey='discharge' stroke='#8884d8' strokeWidth={chartsConfig.line.strokeWith} dot={chartsConfig.line.dot} connectNulls />
-        </LineChart>
-      </ResponsiveContainer>
-      <ResponsiveContainer width={chartsWidth} height={chartsConfig.height}>
-        <LineChart data={series} syncId='charts'>
-          <CartesianGrid strokeDasharray='3 3' />
-          <XAxis dataKey='date' minTickGap={chartsConfig.xAxis.minTickGap} interval={chartsConfig.xAxis.interval} tickFormatter={chartsConfig.xAxis.tickFormatter} />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Line type='monotone' dataKey='level' stroke='#8884d8' strokeWidth={chartsConfig.line.strokeWith} dot={chartsConfig.line.dot} connectNulls />
-        </LineChart>
-      </ResponsiveContainer>
+      {
+        hasTemperature && (
+          <ResponsiveContainer width={chartsWidth} height={chartsConfig.height}>
+            <LineChart data={series} syncId='charts'>
+              <CartesianGrid strokeDasharray='3 3' />
+              <XAxis dataKey='date' minTickGap={chartsConfig.xAxis.minTickGap} interval={chartsConfig.xAxis.interval} tickFormatter={chartsConfig.xAxis.tickFormatter} />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line type='monotone' dataKey='temperature' stroke='#8884d8' strokeWidth={chartsConfig.line.strokeWith} dot={chartsConfig.line.dot} connectNulls />
+            </LineChart>
+          </ResponsiveContainer>
+        )
+      }
+      {
+        hasDischarge && (
+          <ResponsiveContainer width={chartsWidth} height={chartsConfig.height}>
+            <LineChart data={series} syncId='charts'>
+              <CartesianGrid strokeDasharray='3 3' />
+              <XAxis dataKey='date' minTickGap={chartsConfig.xAxis.minTickGap} interval={chartsConfig.xAxis.interval} tickFormatter={chartsConfig.xAxis.tickFormatter} />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line type='monotone' dataKey='discharge' stroke='#8884d8' strokeWidth={chartsConfig.line.strokeWith} dot={chartsConfig.line.dot} connectNulls />
+            </LineChart>
+          </ResponsiveContainer>
+        )
+      }
+      {
+        hasLevel && (
+          <ResponsiveContainer width={chartsWidth} height={chartsConfig.height}>
+            <LineChart data={series} syncId='charts'>
+              <CartesianGrid strokeDasharray='3 3' />
+              <XAxis dataKey='date' minTickGap={chartsConfig.xAxis.minTickGap} interval={chartsConfig.xAxis.interval} tickFormatter={chartsConfig.xAxis.tickFormatter} />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line type='monotone' dataKey='level' stroke='#8884d8' strokeWidth={chartsConfig.line.strokeWith} dot={chartsConfig.line.dot} connectNulls />
+            </LineChart>
+          </ResponsiveContainer>
+        )
+      }
     </>
   )
 }

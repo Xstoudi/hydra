@@ -7,3 +7,10 @@ type StationMeasure = {
   created_at: string
   updated_at: string
 }
+
+type Serie = {
+  date: string
+  temperature?: number
+  discharge?: number
+  level?: number
+}
