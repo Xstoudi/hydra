@@ -6,8 +6,11 @@ import Home from './pages/Home'
 import Stations from './pages/Stations'
 
 import 'react-toastify/dist/ReactToastify.css'
-import Station from './pages/Station'
 import ScrollToTop from './components/ScrollToTop'
+import loadable from '@loadable/component'
+
+const AsyncStations = loadable(() => import('./pages/Stations'))
+const AsyncStation = loadable(() => import('./pages/Station'))
 
 function App() {
   return (
@@ -18,13 +21,13 @@ function App() {
           path='/stations'
           element={
             <MainLayout>
-              <Stations />
+              <AsyncStations />
             </MainLayout>
           }
         />
         <Route path='/stations/:id' element={
           <MainLayout>
-            <Station />
+            <AsyncStation />
           </MainLayout>
         } />
       </Routes>

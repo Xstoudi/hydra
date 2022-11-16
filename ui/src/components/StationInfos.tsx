@@ -52,7 +52,6 @@ export default function StationInfos({ station }: StationInfosProps) {
           <h3 className='text-3xl'>{station.name}</h3>
         </div>
         <div className='grid gap-4 grid-cols-2 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2'>
-          
           {
             station.meta.temperature !== null && (
               <NiceBorder>
