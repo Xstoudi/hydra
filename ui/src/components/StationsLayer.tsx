@@ -1,10 +1,11 @@
-import { DivIcon } from 'leaflet'
-import { memo, useEffect } from 'react'
+import { DivIcon, LeafletMouseEvent } from 'leaflet'
+import { memo, useEffect, useMemo } from 'react'
 import { Marker, useMap, useMapEvents } from 'react-leaflet'
 import { renderToString } from 'react-dom/server'
 
 import { swissCenterPosition } from './SwissMap'
 import Twemoji from './Twemoji'
+import { useNavigate } from 'react-router-dom'
 
 interface StationsLayerProps {
   stations: StationData[]
@@ -19,6 +20,7 @@ const icon = new DivIcon({
 
 function StationsLayer({ stations, updateBounds, wantedPosition }: StationsLayerProps) {
   const map = useMap()
+  const navigate = useNavigate()
 
   useMapEvents({
     zoomend: () => updateBounds !== undefined && updateBounds(map.getBounds()),
@@ -31,10 +33,24 @@ function StationsLayer({ stations, updateBounds, wantedPosition }: StationsLayer
     }
   }, [wantedPosition])
 
+  const markerHandlers = useMemo(() => {
+    return {
+      click: (e: LeafletMouseEvent) => {
+        navigate(`/stations/${e.target.options['data-id']}`)
+      },
+    }
+  }, [navigate])
+
   return <>
     {
       stations.map(station => (
-        <Marker key={station.id} position={[station.coordinates.latitude, station.coordinates.longitude]} icon={icon} />
+        <Marker
+          key={station.id}
+          eventHandlers={markerHandlers}
+          data-id={station.id}
+          position={[station.coordinates.latitude, station.coordinates.longitude]}
+          icon={icon}
+        />
       ))
     }
   </>
