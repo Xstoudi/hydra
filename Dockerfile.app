@@ -19,7 +19,8 @@ COPY --chown=node:node . .
 
 FROM dependencies_front AS build_front
 ENV VITE_SENTRY_DSN=$VITE_SENTRY_DSN
-RUN cd ui && npm run build
+RUN cd ui
+RUN --mount=type=secret,id=VITE_SENTRY_DSN export VITE_SENTRY_DSN=$(cat /run/secrets/VITE_SENTRY_DSN) && VITE_SENTRY_DSN=$VITE_SENTRY_DSN npm run build
 
 FROM dependencies_back AS build_back
 RUN npm run build
