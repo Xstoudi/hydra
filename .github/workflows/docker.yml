@@ -82,6 +82,4 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           file: Dockerfile.app
-          secrets: |
-            "SENTRY_DSN=${{ secrets.SENTRY_DSN }}"
           
