@@ -83,5 +83,5 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           file: Dockerfile.app
           secrets: |
-            "VITE_SENTRY_DSN=${{ secrets.SENTRY_DSN }}"
+            "SENTRY_DSN=${{ secrets.SENTRY_DSN }}"
           
