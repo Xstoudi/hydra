@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import SwissMap, { swissCenterPosition } from '../components/SwissMap'
 import StationCard from '../components/StationCard'
 import { getStations } from '../services/stations'
@@ -7,6 +7,7 @@ import StationsLayer from '../components/StationsLayer'
 import LocateButton from '../components/LocateButton'
 import usePosition from '../hooks/use-position'
 import Spinner from '../components/Spinner'
+import useBreadcrumb from '../hooks/use-breadcrumb'
 
 export default function Stations() {
   const { position } = usePosition()
@@ -15,6 +16,17 @@ export default function Stations() {
     () => getStations(position),
     { keepPreviousData: true }
   )
+
+  const { setBreadcrumbs } = useBreadcrumb()
+
+  useEffect(() => {
+    setBreadcrumbs([
+      {
+        label: 'Stations',
+        path: '/stations',
+      }
+    ])
+  }, [])
 
   const [bounds, setBounds] = useState<L.LatLngBounds | null>(null)
 

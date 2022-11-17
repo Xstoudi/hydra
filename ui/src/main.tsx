@@ -13,6 +13,7 @@ import './utils/i18n'
 import './index.css'
 import 'leaflet/dist/leaflet.css'
 import PositionProvider from './contexts/PositionContext'
+import BreadcrumbProvider from './contexts/BreadcrumbContext'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -38,7 +39,9 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
         <PositionProvider>
-          <App />
+          <BreadcrumbProvider>
+            <App />
+          </BreadcrumbProvider>
         </PositionProvider>
       </QueryClientProvider>
     </BrowserRouter>

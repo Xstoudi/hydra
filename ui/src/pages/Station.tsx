@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { useParams } from 'react-router-dom'
 import StationLoadingSkeleton from '../components/StationLoadingSkeleton'
@@ -5,9 +6,9 @@ import useDebounce from '../hooks/use-debounce'
 import { getStation } from '../services/stations'
 import StationInfos from '../components/StationInfos'
 import StationCharts from '../components/StationCharts'
+import useBreadcrumb from '../hooks/use-breadcrumb'
 
 export default function Station() {
-
   const { id } = useParams()
 
   const { data: stationData, isLoading: isStationLoading } = useQuery(
@@ -17,6 +18,21 @@ export default function Station() {
   )
 
   const debouncedStationLoading = useDebounce(isStationLoading, 500)
+
+  const { setBreadcrumbs } = useBreadcrumb()
+
+  useEffect(() => {
+    setBreadcrumbs([
+      {
+        label: 'Stations',
+        path: '/stations',
+      },
+      {
+        label: stationData?.name || '...',
+        path: `/stations/${id}`,
+      },
+    ])
+  }, [stationData])
 
   return (
     <div className='flex flex-col mx-auto w-5/6 gap-8 md:w-2/3 lg:w-3/5 mt-8'>
