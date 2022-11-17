@@ -32,7 +32,6 @@ interface StationChartsProps {
 }
 
 export default function StationCharts({ stationId }: StationChartsProps) {
-  throw new Error('test')
   const { data: seriesData, isLoading: areSeriesLoading } = useQuery(
     ['station', stationId, 'measures'],
     () => getMeasures(stationId),
