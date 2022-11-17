@@ -18,6 +18,7 @@ RUN npm ci
 COPY --chown=node:node . .
 
 FROM dependencies_front AS build_front
+ENV VITE_SENTRY_DSN=$VITE_SENTRY_DSN
 RUN cd ui && npm run build
 
 FROM dependencies_back AS build_back
