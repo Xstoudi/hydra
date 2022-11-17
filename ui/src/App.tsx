@@ -3,7 +3,6 @@ import { ToastContainer } from 'react-toastify'
 
 import MainLayout from './layouts/MainLayout'
 import Home from './pages/Home'
-import Stations from './pages/Stations'
 
 import 'react-toastify/dist/ReactToastify.css'
 import ScrollToTop from './components/ScrollToTop'
