@@ -8,6 +8,7 @@ import LocateButton from '../components/LocateButton'
 import usePosition from '../hooks/use-position'
 import Spinner from '../components/Spinner'
 import useBreadcrumb from '../hooks/use-breadcrumb'
+import { useTranslation } from 'react-i18next'
 
 export default function Stations() {
   const { position } = usePosition()
@@ -19,10 +20,12 @@ export default function Stations() {
 
   const { setBreadcrumbs } = useBreadcrumb()
 
+  const { t } = useTranslation('stations')
+
   useEffect(() => {
     setBreadcrumbs([
       {
-        label: 'Stations',
+        label: t('stations'),
         path: '/stations',
       }
     ])

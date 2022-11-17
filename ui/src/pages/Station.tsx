@@ -7,6 +7,7 @@ import { getStation } from '../services/stations'
 import StationInfos from '../components/StationInfos'
 import StationCharts from '../components/StationCharts'
 import useBreadcrumb from '../hooks/use-breadcrumb'
+import { useTranslation } from 'react-i18next'
 
 export default function Station() {
   const { id } = useParams()
@@ -21,10 +22,12 @@ export default function Station() {
 
   const { setBreadcrumbs } = useBreadcrumb()
 
+  const { t } = useTranslation('stations')
+
   useEffect(() => {
     setBreadcrumbs([
       {
-        label: 'Stations',
+        label: t('stations'),
         path: '/stations',
       },
       {
