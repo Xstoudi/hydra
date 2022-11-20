@@ -12,6 +12,18 @@
       "aliases": [],
       "flags": []
     },
+    "fetch:ofev:danger_levels": {
+      "settings": {
+        "loadApp": true,
+        "stayAlive": false
+      },
+      "commandPath": "./commands/FetchOfevDangerLevels",
+      "commandName": "fetch:ofev:danger_levels",
+      "description": "Fetch OFEV danger levels for stations",
+      "args": [],
+      "aliases": [],
+      "flags": []
+    },
     "dump:rcfile": {
       "settings": {},
       "commandPath": "@adonisjs/core/build/commands/DumpRc",

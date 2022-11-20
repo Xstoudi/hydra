@@ -1,7 +1,7 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 
 export default class extends BaseSchema {
-  protected tableName = 'measures'
+  protected tableName = 'danger_levels'
 
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
@@ -14,16 +14,15 @@ export default class extends BaseSchema {
         .inTable('stations')
         .onDelete('CASCADE')
 
-      table.enum('type', ['level', 'discharge', 'temperature']).notNullable()
-      table.double('value').notNullable()
-
-      table.timestamp('measured_at', { useTz: true }).notNullable()
+      table.double('min').notNullable()
+      table.double('max').nullable()
+      table.enum('measure_type', ['level', 'discharge', 'temperature']).notNullable()
+      table.enum('type', ['dl1', 'dl2', 'dl3', 'dl4', 'dl5']).notNullable()
 
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
 
-      table.unique(['station_id', 'measured_at', 'type'])
-      table.index(['station_id', 'measured_at'])
+      table.index(['measure_type', 'type', 'station_id'])
     })
   }
 

@@ -8,6 +8,7 @@ import Measure from 'App/Models/Measure'
 import { DateTime, Duration } from 'luxon'
 import wait from 'App/Utils/Wait'
 import durationHumanizer from 'App/Utils/DurationHumanizer'
+import { normalizeDischarge } from 'App/Utils/Normalizer'
 
 export default class FetchOfev extends BaseCommand {
   /**
@@ -119,7 +120,7 @@ export default class FetchOfev extends BaseCommand {
         const { value, unit, datetime } = parameters[parameterKey]!
 
         const normalizedValue =
-          parameterKey === 'discharge' ? this.normalizeDischarge(value, unit) : value
+          parameterKey === 'discharge' ? normalizeDischarge(value, unit) : value
 
         // Check if latest measure was already saved as a different time
         const falselyUpdatedMeasure = await Measure.query()
@@ -150,18 +151,5 @@ export default class FetchOfev extends BaseCommand {
         throw result.reason
       }
     })
-  }
-
-  private normalizeDischarge(value: number, unit: string) {
-    switch (unit) {
-      case 'm3/s':
-        return value
-      case 'l/s':
-        return value / 1000
-      case 'l/min':
-        return value / 1000 / 60
-      default:
-        throw new Error(`unknown discharge unit "${unit}"`)
-    }
   }
 }
