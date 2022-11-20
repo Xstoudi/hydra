@@ -107,13 +107,18 @@ export default class Station extends BaseModel {
 
   public static withDangerLevels = scope((query: StationQuery) => {
     query.select(
-      ...['dl2', 'dl3', 'dl4', 'dl5'].flatMap((field) => [
+      ...['dl2', 'dl3', 'dl4', 'dl5'].map((field) =>
         Database.from('danger_levels')
           .select('min')
           .where('station_id', Database.raw('stations.id'))
           .andWhere('type', field)
-          .as(field),
-      ])
+          .as(field)
+      ),
+      Database.from('danger_levels')
+        .select('measure_type')
+        .where('station_id', Database.raw('stations.id'))
+        .limit(1)
+        .as('dl_measure_type')
     )
   })
 }
