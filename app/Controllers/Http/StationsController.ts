@@ -23,6 +23,7 @@ export default class StationsController {
     return Station.query()
       .where('id', request.param('id'))
       .withScopes((scopes) => scopes.withStats())
+      .withScopes((scopes) => scopes.withDangerLevels())
       .firstOrFail()
   }
 

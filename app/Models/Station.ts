@@ -11,6 +11,7 @@ import {
 } from '@ioc:Adonis/Lucid/Orm'
 import Database from '@ioc:Adonis/Lucid/Database'
 import Measure from './Measure'
+import DangerLevel from './DangerLevel'
 
 type StationQuery = ModelQueryBuilderContract<typeof Station>
 
@@ -102,5 +103,17 @@ export default class Station extends BaseModel {
           .limit(1)
           .as('last_measured_at')
       )
+  })
+
+  public static withDangerLevels = scope((query: StationQuery) => {
+    query.select(
+      ...['dl2', 'dl3', 'dl4', 'dl5'].flatMap((field) => [
+        Database.from('danger_levels')
+          .select('min')
+          .where('station_id', Database.raw('stations.id'))
+          .andWhere('type', field)
+          .as(field),
+      ])
+    )
   })
 }
