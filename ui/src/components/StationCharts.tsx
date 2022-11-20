@@ -104,7 +104,8 @@ export default function StationCharts({ stationId }: StationChartsProps) {
               <Tooltip
                 labelFormatter={chartsConfig.xAxis.tickFormatter}
                 formatter={translateTooltip}
-              />              <Legend />
+              />
+              <Legend formatter={translateLegend} />
               <Line type='monotone' dataKey='discharge' stroke='#8884d8' strokeWidth={chartsConfig.line.strokeWith} dot={chartsConfig.line.dot} connectNulls />
             </LineChart>
           </ResponsiveContainer>
@@ -120,7 +121,8 @@ export default function StationCharts({ stationId }: StationChartsProps) {
               <Tooltip
                 labelFormatter={chartsConfig.xAxis.tickFormatter}
                 formatter={translateTooltip}
-              />              <Legend />
+              />
+              <Legend formatter={translateLegend} />
               <Line type='monotone' dataKey='level' stroke='#8884d8' strokeWidth={chartsConfig.line.strokeWith} dot={chartsConfig.line.dot} connectNulls />
             </LineChart>
           </ResponsiveContainer>
