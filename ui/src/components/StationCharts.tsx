@@ -1,11 +1,13 @@
 import { useQuery } from '@tanstack/react-query'
 import sortBy from 'lodash/sortBy'
 import groupBy from 'lodash/groupBy'
-import { useMemo } from 'react'
+import { useCallback, useMemo } from 'react'
 import { ResponsiveContainer, LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Line } from 'recharts'
 import { getMeasures } from '../services/measures'
 import { DateTime } from 'luxon'
 import Spinner from './Spinner'
+import { useTranslation } from 'react-i18next'
+import { Formatter, Payload } from 'recharts/types/component/DefaultTooltipContent'
 
 const chartsWidth = '100%'
 
@@ -61,6 +63,14 @@ export default function StationCharts({ stationId }: StationChartsProps) {
     return { hasTemperature, hasDischarge, hasLevel }
   }, [series])
 
+  const { t } = useTranslation('stations')
+
+  const translateTooltip: Formatter<number, string> = useCallback(
+    (value: number, name: string) => [value, t(`params.${name as 'temperature' | 'discharge' | 'level'}`)],
+    [t]
+  )
+  const translateLegend = useCallback((value: 'temperature' | 'discharge' | 'level') => t(`params.${value}`), [t])
+
   if(areSeriesLoading) {
     return <Spinner />
   }
@@ -74,8 +84,11 @@ export default function StationCharts({ stationId }: StationChartsProps) {
               <CartesianGrid strokeDasharray='3 3' />
               <XAxis dataKey='date' minTickGap={chartsConfig.xAxis.minTickGap} interval={chartsConfig.xAxis.interval} tickFormatter={chartsConfig.xAxis.tickFormatter} />
               <YAxis domain={chartsConfig.yAxis.domain} unit='°C' width={chartsConfig.yAxis.width} />
-              <Tooltip labelFormatter={chartsConfig.xAxis.tickFormatter} />
-              <Legend />
+              <Tooltip
+                labelFormatter={chartsConfig.xAxis.tickFormatter}
+                formatter={translateTooltip}
+              />
+              <Legend formatter={translateLegend} />
               <Line type='monotone' dataKey='temperature' stroke='#8884d8' strokeWidth={chartsConfig.line.strokeWith} dot={chartsConfig.line.dot} connectNulls />
             </LineChart>
           </ResponsiveContainer>
@@ -88,8 +101,10 @@ export default function StationCharts({ stationId }: StationChartsProps) {
               <CartesianGrid strokeDasharray='3 3' />
               <XAxis dataKey='date' minTickGap={chartsConfig.xAxis.minTickGap} interval={chartsConfig.xAxis.interval} tickFormatter={chartsConfig.xAxis.tickFormatter} />
               <YAxis domain={chartsConfig.yAxis.domain} unit='m&sup3;/s' width={chartsConfig.yAxis.width} />
-              <Tooltip labelFormatter={chartsConfig.xAxis.tickFormatter} />
-              <Legend />
+              <Tooltip
+                labelFormatter={chartsConfig.xAxis.tickFormatter}
+                formatter={translateTooltip}
+              />              <Legend />
               <Line type='monotone' dataKey='discharge' stroke='#8884d8' strokeWidth={chartsConfig.line.strokeWith} dot={chartsConfig.line.dot} connectNulls />
             </LineChart>
           </ResponsiveContainer>
@@ -102,8 +117,10 @@ export default function StationCharts({ stationId }: StationChartsProps) {
               <CartesianGrid strokeDasharray='3 3' />
               <XAxis dataKey='date' minTickGap={chartsConfig.xAxis.minTickGap} interval={chartsConfig.xAxis.interval} tickFormatter={chartsConfig.xAxis.tickFormatter} />
               <YAxis domain={chartsConfig.yAxis.domain} unit='m' width={chartsConfig.yAxis.width} />
-              <Tooltip labelFormatter={chartsConfig.xAxis.tickFormatter} />
-              <Legend />
+              <Tooltip
+                labelFormatter={chartsConfig.xAxis.tickFormatter}
+                formatter={translateTooltip}
+              />              <Legend />
               <Line type='monotone' dataKey='level' stroke='#8884d8' strokeWidth={chartsConfig.line.strokeWith} dot={chartsConfig.line.dot} connectNulls />
             </LineChart>
           </ResponsiveContainer>

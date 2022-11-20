@@ -10,6 +10,11 @@
     "piezometer": "Piezometer",
     "spring": "Spring"
   },
+  "params": {
+    "temperature": "Temperature",
+    "discharge": "Discharge",
+    "level": "Water level"
+  },
   "errors": {
     "geolocation": {
       "unsupported": "Geolocation is not supported on your device.",
