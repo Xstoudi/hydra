@@ -7,7 +7,8 @@ import { getMeasures } from '../services/measures'
 import { DateTime } from 'luxon'
 import Spinner from './Spinner'
 import { useTranslation } from 'react-i18next'
-import { Formatter, Payload } from 'recharts/types/component/DefaultTooltipContent'
+// eslint-disable-next-line import/no-unresolved
+import { Formatter } from 'recharts/types/component/DefaultTooltipContent'
 
 const chartsWidth = '100%'
 
