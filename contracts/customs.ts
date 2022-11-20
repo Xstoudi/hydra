@@ -1,4 +1,5 @@
 type OFEVStationsResponse = OFEVStationLight[]
+type OFEVStationsWithDataResponse = Record<string, OFEVStationResponse>
 
 interface OFEVStationLight {
   id: string

@@ -72,6 +72,7 @@ export default class FetchOfev extends BaseCommand {
 
   private async pollerRoutine(api: AxiosInstance) {
     const { data: stations } = await api.get<OFEVStationsResponse>('stations')
+    const { data: stationsData } = await api.get<OFEVStationsWithDataResponse>('stations/data')
 
     this.logger.info('fetching stations...', undefined, `${stations.length}`)
     const logUpdate: OnProgressCallback<OFEVStationLight> = (_, pool) =>
@@ -84,12 +85,7 @@ export default class FetchOfev extends BaseCommand {
       .withConcurrency(10)
       .onTaskStarted(logUpdate)
       .onTaskFinished(logUpdate)
-      .process((station) =>
-        api
-          .get<OFEVStationResponse>(`station/${station.id}`)
-          .then((response) => response.data)
-          .then((data) => this.handleStation(station.id, data))
-      )
+      .process((station) => this.handleStation(station.id, stationsData[station.id]))
 
     this.logger.logUpdatePersist()
     this.logger.success('fetched stations', undefined, `${results.length}`)
