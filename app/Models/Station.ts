@@ -11,7 +11,6 @@ import {
 } from '@ioc:Adonis/Lucid/Orm'
 import Database from '@ioc:Adonis/Lucid/Database'
 import Measure from './Measure'
-import DangerLevel from './DangerLevel'
 
 type StationQuery = ModelQueryBuilderContract<typeof Station>
 
