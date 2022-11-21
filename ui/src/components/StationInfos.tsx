@@ -8,6 +8,9 @@ import { DateTime } from 'luxon'
 import { useTranslation } from 'react-i18next'
 
 import { LANGUAGES } from './LangSelector'
+import range from 'lodash/range'
+import clsx from 'clsx'
+import typeToUnit from '../utils/typeToUnit'
 
 interface StationInfosProps {
   station: StationData
@@ -27,7 +30,7 @@ export default function StationInfos({ station }: StationInfosProps) {
   )
 
   return (
-    <div className='space-y-8 gap-8 flex md:space-y-0 flex-col lg:flex-row lg:items-center'>
+    <div className='justify-between space-y-8 gap-8 flex md:space-y-0 flex-col lg:flex-row lg:items-center'>
       <div className='flex-col gap-4 w-full lg:w-1/2 xl:w-1/3 h-80 flex'>
         <SwissMap centerPosition={stationPosition}>
           <StationsLayer stations={[station]} />
@@ -41,7 +44,7 @@ export default function StationInfos({ station }: StationInfosProps) {
           }
         </p>
       </div>
-      <div className='flex flex-col gap-12 w-full lg:w-1/2'>
+      <div className='flex flex-col gap-8 w-full lg:w-3/5'>
         <div className='flex flex-col'>
           <div className='flex gap-2'>
             <h2 className='text-4xl'>{station.water_body_name}</h2>
@@ -74,7 +77,38 @@ export default function StationInfos({ station }: StationInfosProps) {
             )
           }
         </div>
-      </div>   
+        {
+          station.meta.dl_measure_type !== null && (
+            <div className='flex flex-col gap-4'>
+              <h4 className='text-2xl'>Danger levels</h4>
+              <table className='w-full table-fixed text-lg'>
+                <thead>
+                  <tr>
+                    <th className='border-2 px-2 py-3'>{t('danger_levels')}</th>
+                    {
+                      range(1, 6).map(i => (
+                        <th className={clsx('text-center border-2 px-2 py-3', { 'bg-[#ffff7f]': i === 2 }, { 'bg-[#ffcc7f]': i === 3 }, { 'bg-[#ff7f7f]': i === 4 }, { 'bg-[#bf7f7f]': i === 5 })} key={i}>
+                          {t('dl')}{i}
+                        </th>
+                      ))
+                    }
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th className='text-center border-2 px-2 py-3'>{t(`params.${station.meta.dl_measure_type}`)} [{typeToUnit(station.meta.dl_measure_type)}]</th>
+                    <td className='text-center border-2 px-2 py-3'>{`< ${station.meta.dl2}`}</td>
+                    <td className='text-center border-2 px-2 py-3'>{`${station.meta.dl2} - ${station.meta.dl3}`}</td>
+                    <td className='text-center border-2 px-2 py-3'>{`${station.meta.dl3} - ${station.meta.dl4}`}</td>
+                    <td className='text-center border-2 px-2 py-3'>{`${station.meta.dl4} - ${station.meta.dl5}`}</td>
+                    <td className='text-center border-2 px-2 py-3'>{`> ${station.meta.dl5}`}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          )
+        }
+      </div>
     </div>
   )
 }
