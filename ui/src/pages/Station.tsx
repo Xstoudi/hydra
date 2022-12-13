@@ -46,7 +46,7 @@ export default function Station() {
             <>
               <StationInfos station={stationData} />
               <hr />
-              <StationCharts stationId={id} />
+              <StationCharts station={stationData} stationId={id} />
             </>
           )
         }

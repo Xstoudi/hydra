@@ -14,6 +14,8 @@ type StationData = {
     dl3: number | null
     dl4: number | null
     dl5: number | null
-    dl_measure_type: 'level' | 'discharge' | 'temperature' | null
+    dl_measure_type: MeasureType | null
   }
 }
+
+type MeasureType = 'level' | 'discharge' | 'temperature'

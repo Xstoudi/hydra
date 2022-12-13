@@ -80,7 +80,7 @@ export default function StationInfos({ station }: StationInfosProps) {
         {
           station.meta.dl_measure_type !== null && (
             <div className='flex flex-col gap-4'>
-              <h4 className='text-2xl'>Danger levels</h4>
+              <h4 className='text-2xl'>{t('danger_levels')}</h4>
               <table className='w-full table-fixed text-lg'>
                 <thead>
                   <tr>

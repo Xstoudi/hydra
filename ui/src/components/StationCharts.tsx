@@ -2,39 +2,20 @@ import { useQuery } from '@tanstack/react-query'
 import sortBy from 'lodash/sortBy'
 import groupBy from 'lodash/groupBy'
 import { useCallback, useMemo } from 'react'
-import { ResponsiveContainer, LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Line } from 'recharts'
 import { getMeasures } from '../services/measures'
-import { DateTime } from 'luxon'
 import Spinner from './Spinner'
 import { useTranslation } from 'react-i18next'
 // eslint-disable-next-line import/no-unresolved
 import { Formatter } from 'recharts/types/component/DefaultTooltipContent'
+import StationChart from './StationChart'
 
-const chartsWidth = '100%'
-
-const chartsConfig = {
-  width: '100%',
-  height: 400,
-  xAxis: {
-    minTickGap: 30,
-    interval: 'preserveEnd' as const,
-    tickFormatter: (x: string) => DateTime.fromISO(x).toLocaleString(DateTime.DATETIME_SHORT)
-  },
-  yAxis: {
-    domain: ['dataMin', 'dataMax'],
-    width: 100
-  },
-  line: {
-    strokeWith: 2,
-    dot: false
-  }
-}
 
 interface StationChartsProps {
+  station: StationData
   stationId?: string
 }
 
-export default function StationCharts({ stationId }: StationChartsProps) {
+export default function StationCharts({ station, stationId }: StationChartsProps) {
   const { data: seriesData, isLoading: areSeriesLoading } = useQuery(
     ['station', stationId, 'measures'],
     () => getMeasures(stationId),
@@ -51,7 +32,7 @@ export default function StationCharts({ stationId }: StationChartsProps) {
     return sortBy(dates
       .map(date => groupedByDate[date])
       .map(sameDateMeasures => ({
-        date: sameDateMeasures[0].measured_at, //DateTime.fromISO(sameDateMeasures[0].measured_at).toUnixInteger(),
+        date: sameDateMeasures[0].measured_at,
         ...Object.fromEntries(sameDateMeasures.map(m => [m.type, m.value]))
       })), ['date']) as Serie[]
   }, [seriesData])
@@ -67,10 +48,10 @@ export default function StationCharts({ stationId }: StationChartsProps) {
   const { t } = useTranslation('stations')
 
   const translateTooltip: Formatter<number, string> = useCallback(
-    (value: number, name: string) => [value, t(`params.${name as 'temperature' | 'discharge' | 'level'}`)],
+    (value: number, name: string) => [value, t(`params.${name as MeasureType}`)],
     [t]
   )
-  const translateLegend = useCallback((value: 'temperature' | 'discharge' | 'level') => t(`params.${value}`), [t])
+  const translateLegend = useCallback((value: MeasureType) => t(`params.${value}`), [t])
 
   if(areSeriesLoading) {
     return <Spinner />
@@ -80,53 +61,38 @@ export default function StationCharts({ stationId }: StationChartsProps) {
     <>
       {
         hasTemperature && (
-          <ResponsiveContainer width={chartsWidth} height={chartsConfig.height}>
-            <LineChart data={series} syncId='charts'>
-              <CartesianGrid strokeDasharray='3 3' />
-              <XAxis dataKey='date' minTickGap={chartsConfig.xAxis.minTickGap} interval={chartsConfig.xAxis.interval} tickFormatter={chartsConfig.xAxis.tickFormatter} />
-              <YAxis domain={chartsConfig.yAxis.domain} unit='°C' width={chartsConfig.yAxis.width} />
-              <Tooltip
-                labelFormatter={chartsConfig.xAxis.tickFormatter}
-                formatter={translateTooltip}
-              />
-              <Legend formatter={translateLegend} />
-              <Line type='monotone' dataKey='temperature' stroke='#8884d8' strokeWidth={chartsConfig.line.strokeWith} dot={chartsConfig.line.dot} connectNulls />
-            </LineChart>
-          </ResponsiveContainer>
+          <StationChart
+            station={station}
+            series={series}
+            translateTooltip={translateTooltip}
+            translateLegend={translateLegend}
+            measureType='temperature'
+            unit='°C'
+          />
         )
       }
       {
         hasDischarge && (
-          <ResponsiveContainer width={chartsWidth} height={chartsConfig.height}>
-            <LineChart data={series} syncId='charts'>
-              <CartesianGrid strokeDasharray='3 3' />
-              <XAxis dataKey='date' minTickGap={chartsConfig.xAxis.minTickGap} interval={chartsConfig.xAxis.interval} tickFormatter={chartsConfig.xAxis.tickFormatter} />
-              <YAxis domain={chartsConfig.yAxis.domain} unit='m&sup3;/s' width={chartsConfig.yAxis.width} />
-              <Tooltip
-                labelFormatter={chartsConfig.xAxis.tickFormatter}
-                formatter={translateTooltip}
-              />
-              <Legend formatter={translateLegend} />
-              <Line type='monotone' dataKey='discharge' stroke='#8884d8' strokeWidth={chartsConfig.line.strokeWith} dot={chartsConfig.line.dot} connectNulls />
-            </LineChart>
-          </ResponsiveContainer>
+          <StationChart
+            station={station}
+            series={series}
+            translateTooltip={translateTooltip}
+            translateLegend={translateLegend}
+            measureType='discharge'
+            unit='m&sup3;/s'
+          />
         )
       }
       {
         hasLevel && (
-          <ResponsiveContainer width={chartsWidth} height={chartsConfig.height}>
-            <LineChart data={series} syncId='charts'>
-              <CartesianGrid strokeDasharray='3 3' />
-              <XAxis dataKey='date' minTickGap={chartsConfig.xAxis.minTickGap} interval={chartsConfig.xAxis.interval} tickFormatter={chartsConfig.xAxis.tickFormatter} />
-              <YAxis domain={chartsConfig.yAxis.domain} unit='m' width={chartsConfig.yAxis.width} />
-              <Tooltip
-                labelFormatter={chartsConfig.xAxis.tickFormatter}
-                formatter={translateTooltip}
-              />
-              <Legend formatter={translateLegend} />
-              <Line type='monotone' dataKey='level' stroke='#8884d8' strokeWidth={chartsConfig.line.strokeWith} dot={chartsConfig.line.dot} connectNulls />
-            </LineChart>
-          </ResponsiveContainer>
+          <StationChart
+            station={station}
+            series={series}
+            translateTooltip={translateTooltip}
+            translateLegend={translateLegend}
+            measureType='level'
+            unit='m'
+          />
         )
       }
     </>
