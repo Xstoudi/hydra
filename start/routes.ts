@@ -6,6 +6,7 @@ Route.group(() => {
   Route.get('/stations', 'StationsController.stations').as('stations')
   Route.get('/stations/:id', 'StationsController.station').as('station')
   Route.get('/stations/:id/measures', 'StationsController.measures').as('measures')
+  Route.get('/health', 'HealthController.health').as('health')
 })
   .prefix('/api')
   .where('id', Route.matchers.number())
