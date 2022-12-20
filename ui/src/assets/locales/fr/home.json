@@ -1,4 +1,22 @@
 {
   "description": "Visualisation des données hydrologiques suisses.",
-  "enter-app-button": "Entrer dans l'application"
+  "enter-app-button": "Entrer dans l'application",
+  "parts": {
+    "realtime": {
+      "title": "Données temps réel",
+      "description": "Les données sont récupérées en temps réel depuis l'OFEV et mises à jour sur le site toutes les 10 minutes."
+    },
+    "opensource": {
+      "title": "Open Source",
+      "description": "Cette application est distribuée sous licence MIT donc librement utilisable, modifiable et redistribuable."
+    },
+    "unverified": {
+      "title": "Non vérifiées",
+      "description": "Toutes les informations sur le site sont en direct et donc sujettes à des variations par rapport à la réalité."
+    },
+    "responsive": {
+      "title": "Responsive",
+      "description": "L'application est conçue pour être utilisée sur ordinateur, tablette et smartphone."
+    }
+  }
 }
