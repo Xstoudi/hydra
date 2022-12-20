@@ -32,5 +32,12 @@
     "start": "Date de départ",
     "end": "Date de fin"
   },
-  "to": "à"
+  "to": "à",
+  "aggregate": {
+    "none": "Aucun",
+    "hour": "Moyenne par heure",
+    "6-hours": "Moyenne sur 6 heures",
+    "12-hours": "Moyenne sur 12 heures",
+    "day": "Moyenne journalière"
+  }
 }

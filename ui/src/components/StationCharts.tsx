@@ -15,11 +15,11 @@ import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/24/outline'
 
 
 const aggregatePossibilities = [
-  { value: 'none', label: 'None' },
-  { value: 'hour', label: 'Hourly' },
-  { value:'6-hours', label: 'Six hour average' },
-  { value: '12-hours', label: '12 hours average' }, 
-  { value: 'day', label: 'Daily' }
+  'none',
+  'hour',
+  '6-hours',
+  '12-hours',
+  'day'
 ] as const
 
 interface StationChartsProps {
@@ -35,8 +35,8 @@ export default function StationCharts({ station, stationId }: StationChartsProps
   const [aggregate, setAggregate] = useState<Aggregate>(aggregatePossibilities[1])
 
   const { data: seriesData, isLoading: areSeriesLoading } = useQuery(
-    ['station', stationId, 'measures', fromDate?.toMillis(), toDate?.toMillis(), aggregate.value],
-    () => getMeasures(stationId, fromDate, toDate, aggregate.value)
+    ['station', stationId, 'measures', fromDate?.toMillis(), toDate?.toMillis(), aggregate],
+    () => getMeasures(stationId, fromDate, toDate, aggregate)
   )
 
   const series = useMemo(() => {
@@ -81,7 +81,7 @@ export default function StationCharts({ station, stationId }: StationChartsProps
         <Listbox value={aggregate} onChange={setAggregate}>
           <div className='relative w-56'>
             <Listbox.Button className='ml-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'>
-              <span className='text-left block truncate'>{aggregate.label}</span>
+              <span className='text-left block truncate'>{t(`aggregate.${aggregate}`)}</span>
               <span className='pointer-events-none absolute inset-y-0 right-0 flex items-center'>
                 <ChevronUpDownIcon
                   className='h-5 w-5 text-gray-400'
@@ -99,7 +99,7 @@ export default function StationCharts({ station, stationId }: StationChartsProps
                 {
                   aggregatePossibilities.map((aggregatePossibility) => (
                     <Listbox.Option
-                      key={aggregatePossibility.value}
+                      key={aggregatePossibility}
                       value={aggregatePossibility}
                       className={
                         ({ active }) =>
@@ -111,7 +111,7 @@ export default function StationCharts({ station, stationId }: StationChartsProps
                       {
                         ({ selected }) => (
                           <div className='flex items-center'>
-                            {aggregatePossibility.label}
+                            {aggregatePossibility}
                             {
                               selected ? (
                                 <span className='absolute inset-y-0 right-0 flex items-center pr-2 text-blue-600'>
