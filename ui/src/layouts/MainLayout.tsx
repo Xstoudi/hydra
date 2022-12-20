@@ -1,6 +1,6 @@
 import { memo } from 'react'
-import Footer from '../components/Footer'
-import Header from '../components/Header'
+import Footer from '../components/common/Footer'
+import Header from '../components/common/Header'
 
 interface MainLayoutProps {
   children: React.ReactNode

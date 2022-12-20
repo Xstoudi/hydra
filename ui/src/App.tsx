@@ -5,7 +5,7 @@ import MainLayout from './layouts/MainLayout'
 import Home from './pages/Home'
 
 import 'react-toastify/dist/ReactToastify.css'
-import ScrollToTop from './components/ScrollToTop'
+import ScrollToTop from './components/utils/ScrollToTop'
 import loadable from '@loadable/component'
 
 const AsyncStations = loadable(() => import('./pages/Stations'))

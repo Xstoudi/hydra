@@ -4,7 +4,7 @@ import { Marker, useMap, useMapEvents } from 'react-leaflet'
 import { renderToString } from 'react-dom/server'
 
 import { swissCenterPosition } from './SwissMap'
-import Twemoji from './Twemoji'
+import Twemoji from '../utils/Twemoji'
 import { useNavigate } from 'react-router-dom'
 
 interface StationsLayerProps {

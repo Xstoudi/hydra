@@ -1,16 +1,16 @@
 import { useQuery } from '@tanstack/react-query'
 import sortBy from 'lodash/sortBy'
 import groupBy from 'lodash/groupBy'
-import { Fragment, useCallback, useMemo, useState } from 'react'
-import { getMeasures } from '../services/measures'
-import Spinner from './Spinner'
+import { useCallback, useMemo, useState } from 'react'
+import { getMeasures } from '../../services/measures'
+import Spinner from '../utils/Spinner'
 import { useTranslation } from 'react-i18next'
 // eslint-disable-next-line import/no-unresolved
 import { Formatter } from 'recharts/types/component/DefaultTooltipContent'
 import StationChart from './StationChart'
 import { DateTime, Duration } from 'luxon'
-import DateRangePicker from './DateRangePicker'
-import AggregateSelector from './AggregateSelector'
+import DateRangePicker from '../date/DateRangePicker'
+import AggregateSelector from '../selector/AggregateSelector'
 
 const aggregatePossibilities = [
   'none',

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import useBreadcrumbs from '../hooks/use-breadcrumb'
+import useBreadcrumbs from '../../hooks/use-breadcrumb'
 
 export default function Breadcrumb() {
   const { breadcrumbs } = useBreadcrumbs()

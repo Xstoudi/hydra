@@ -2,7 +2,7 @@ import { memo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
-import LangSelector from './LangSelector'
+import LangSelector from './selector/LangSelector'
 
 function Hero() {
   const { t } = useTranslation('home')

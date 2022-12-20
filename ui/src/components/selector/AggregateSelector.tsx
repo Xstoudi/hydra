@@ -1,7 +1,8 @@
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/24/outline'
 import { Dispatch, Fragment, SetStateAction } from 'react'
-import { Aggregate } from './StationCharts'
+import { useTranslation } from 'react-i18next'
+import { Aggregate } from '../station/StationCharts'
 
 interface AggregateSelectorProps {
   value: Aggregate
@@ -10,6 +11,9 @@ interface AggregateSelectorProps {
 }
 
 export default function AggregateSelector({ value, setValue, possibleValues }: AggregateSelectorProps) {
+
+  const { t } = useTranslation('stations')
+
   return (
     <Listbox value={value} onChange={setValue}>
       <div className='relative w-56'>
@@ -44,7 +48,7 @@ export default function AggregateSelector({ value, setValue, possibleValues }: A
                   {
                     ({ selected }) => (
                       <div className='flex items-center'>
-                        {possibleValue}
+                        {t(`aggregate.${possibleValue}`)}
                         {
                           selected ? (
                             <span className='absolute inset-y-0 right-0 flex items-center pr-2 text-blue-600'>

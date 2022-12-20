@@ -1,7 +1,7 @@
 import { memo } from 'react'
 import { Link } from 'react-router-dom'
-import Card from './Card'
-import CardStat from './CardStat'
+import Card from '../Card'
+import CardStat from '../CardStat'
 
 interface StationCardProps {
   station: StationData

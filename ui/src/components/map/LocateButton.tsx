@@ -1,8 +1,8 @@
 import { ArrowPathIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import { memo } from 'react'
-import usePosition from '../hooks/use-position'
-import Twemoji from './Twemoji'
+import usePosition from '../../hooks/use-position'
+import Twemoji from '../utils/Twemoji'
 
 function LocateButton() {
 

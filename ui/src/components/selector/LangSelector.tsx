@@ -1,4 +1,4 @@
-import Twemoji from '../components/Twemoji'
+import Twemoji from '../utils/Twemoji'
 import { ChevronUpDownIcon, CheckIcon } from '@heroicons/react/24/outline'
 import { Listbox, Transition } from '@headlessui/react'
 import { Fragment, memo, useEffect, useState } from 'react'

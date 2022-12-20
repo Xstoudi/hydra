@@ -1,16 +1,16 @@
 import { useMemo } from 'react'
-import Badge from './Badge'
-import CardStat from './CardStat'
-import NiceBorder from './NiceBorder'
-import StationsLayer from './StationsLayer'
-import SwissMap from './SwissMap'
+import Badge from '../utils/Badge'
+import CardStat from '../CardStat'
+import NiceBorder from '../utils/NiceBorder'
+import StationsLayer from '../map/StationsLayer'
+import SwissMap from '../map/SwissMap'
 import { DateTime } from 'luxon'
 import { useTranslation } from 'react-i18next'
 
-import { LANGUAGES } from './LangSelector'
+import { LANGUAGES } from '../selector/LangSelector'
 import range from 'lodash/range'
 import clsx from 'clsx'
-import typeToUnit from '../utils/typeToUnit'
+import typeToUnit from '../../utils/typeToUnit'
 
 interface StationInfosProps {
   station: StationData

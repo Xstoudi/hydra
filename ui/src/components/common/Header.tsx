@@ -1,7 +1,7 @@
 import { memo } from 'react'
 import { Link } from 'react-router-dom'
 import Breadcrumb from './Breadcrumb'
-import LangSelector from './LangSelector'
+import LangSelector from '../selector/LangSelector'
 
 function Header() {
   return (

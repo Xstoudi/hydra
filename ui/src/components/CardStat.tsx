@@ -1,5 +1,5 @@
 import { memo } from 'react'
-import Twemoji from './Twemoji'
+import Twemoji from './utils/Twemoji'
 
 interface CardStatProps {
   emoji: string
