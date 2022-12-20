@@ -76,11 +76,11 @@ export default function StationCharts({ station, stationId }: StationChartsProps
 
   return (
     <>
-      <div className='flex flex-col md:flex-row'>
+      <div className='flex flex-col md:flex-row gap-4'>
         <DateRangePicker fromDate={fromDate} setFromDate={setFromDate} toDate={toDate} setToDate={setToDate} />
         <Listbox value={aggregate} onChange={setAggregate}>
           <div className='relative w-56'>
-            <Listbox.Button className='ml-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'>
+            <Listbox.Button className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'>
               <span className='text-left block truncate'>{t(`aggregate.${aggregate}`)}</span>
               <span className='pointer-events-none absolute inset-y-0 right-0 flex items-center'>
                 <ChevronUpDownIcon
