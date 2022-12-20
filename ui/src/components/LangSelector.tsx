@@ -43,7 +43,7 @@ function LangSelector() {
                 >
                   {
                     ({ selected }) => (
-                      <div className=' flex items-center'>
+                      <div className='flex items-center'>
                         <Twemoji emoji={lang.emoji} size='sm' />
                         <span className={`ml-2 block truncate ${selected ? 'font-medium' : 'font-normal'}`}>
                           {lang.name}

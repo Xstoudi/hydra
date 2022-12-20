@@ -26,7 +26,8 @@ const chartsConfig = {
   },
   yAxis: {
     domain: ['dataMin', 'dataMax'],
-    width: 100
+    width: 100,
+    tickFormatter: (x: number) => x.toFixed(3)
   },
   line: {
     strokeWith: 2,
@@ -69,7 +70,12 @@ export default function StationChart({
       <LineChart data={series} syncId='charts'>
         <CartesianGrid strokeDasharray='3 3' />
         <XAxis dataKey='date' minTickGap={chartsConfig.xAxis.minTickGap} interval={chartsConfig.xAxis.interval} tickFormatter={chartsConfig.xAxis.tickFormatter} />
-        <YAxis domain={chartsConfig.yAxis.domain} unit={unit} width={chartsConfig.yAxis.width} />
+        <YAxis
+          domain={chartsConfig.yAxis.domain}
+          unit={unit}
+          width={chartsConfig.yAxis.width}
+          tickFormatter={chartsConfig.yAxis.tickFormatter}
+        />
         <Tooltip
           labelFormatter={chartsConfig.xAxis.tickFormatter}
           formatter={translateTooltip}
