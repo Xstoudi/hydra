@@ -9,7 +9,7 @@ export default function Hero() {
   return (
     <header className='bg-hero-background bg-cover bg-center'>
       <div className='h-screen w-full backdrop-blur-sm'>
-        <div className='absolute top-8 right-16 m-16'>
+        <div className='absolute mx-auto w-40 inset-x-0 top-12 md:right-12 md:mr-0'>
           <LangSelector />
         </div>
         <div className='flex h-full w-full flex-col items-center justify-center gap-4 text-white'>
