@@ -1,4 +1,3 @@
-import { memo } from 'react'
 import Twemoji from './utils/Twemoji'
 
 interface CardStatProps {
@@ -7,7 +6,7 @@ interface CardStatProps {
   unit: string
 }
 
-function CardStat({ emoji, value, unit }: CardStatProps) {
+export default function CardStat({ emoji, value, unit }: CardStatProps) {
   return (
     <div className='grid grid-cols-3'>
       <Twemoji emoji={emoji} size='md' />
@@ -16,5 +15,3 @@ function CardStat({ emoji, value, unit }: CardStatProps) {
     </div>
   )
 }
-
-export default memo(CardStat)

@@ -1,4 +1,4 @@
-import { memo, useMemo } from 'react'
+import { useMemo } from 'react'
 import { MapContainer, TileLayer } from 'react-leaflet'
 
 interface SwissMapProps {
@@ -8,7 +8,7 @@ interface SwissMapProps {
 
 export const swissCenterPosition: [number, number] = [46.798333, 8.231944]
 
-function SwissMap({ children, centerPosition }: SwissMapProps) {
+export default function SwissMap({ children, centerPosition }: SwissMapProps) {
   const defaultedCenterPosition: [number, number] = useMemo(
     () => centerPosition || swissCenterPosition,
     [centerPosition, swissCenterPosition]
@@ -30,5 +30,3 @@ function SwissMap({ children, centerPosition }: SwissMapProps) {
     </MapContainer>
   )
 }
-
-export default memo(SwissMap)

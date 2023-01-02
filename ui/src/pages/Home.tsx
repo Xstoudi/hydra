@@ -1,9 +1,8 @@
-import { memo } from 'react'
 import { useTranslation } from 'react-i18next'
 import Footer from '../components/common/Footer'
 import Hero from '../components/Hero'
 
-function Home() {
+export default function Home() {
 
   const { t } = useTranslation('home')
 
@@ -32,5 +31,3 @@ function Home() {
     </div>
   )
 }
-
-export default memo(Home)

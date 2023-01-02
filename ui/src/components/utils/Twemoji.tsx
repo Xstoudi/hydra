@@ -1,6 +1,5 @@
 import twemoji from 'twemoji'
 import clsx from 'clsx'
-import { memo } from 'react'
 
 type TwemojiSize = 'lg' | 'md' | 'sm'
 
@@ -10,7 +9,7 @@ interface TwemojiProps {
   className?: string
 }
 
-function Twemoji({ emoji, size = 'md', className }: TwemojiProps) {
+export default function Twemoji({ emoji, size = 'md', className }: TwemojiProps) {
   return (
     <div className={
       clsx(
@@ -34,5 +33,3 @@ function Twemoji({ emoji, size = 'md', className }: TwemojiProps) {
     </div>
   )
 }
-
-export default memo(Twemoji)

@@ -1,5 +1,5 @@
 import { DivIcon, LeafletMouseEvent } from 'leaflet'
-import { memo, useEffect, useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import { Marker, useMap, useMapEvents } from 'react-leaflet'
 import { renderToString } from 'react-dom/server'
 
@@ -18,7 +18,7 @@ const icon = new DivIcon({
   className: '',
 })
 
-function StationsLayer({ stations, updateBounds, wantedPosition }: StationsLayerProps) {
+export default function StationsLayer({ stations, updateBounds, wantedPosition }: StationsLayerProps) {
   const map = useMap()
   const navigate = useNavigate()
 
@@ -55,5 +55,3 @@ function StationsLayer({ stations, updateBounds, wantedPosition }: StationsLayer
     }
   </>
 }
-
-export default memo(StationsLayer)

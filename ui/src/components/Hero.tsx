@@ -1,10 +1,9 @@
-import { memo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
 import LangSelector from './selector/LangSelector'
 
-function Hero() {
+export default function Hero() {
   const { t } = useTranslation('home')
 
   return (
@@ -23,5 +22,3 @@ function Hero() {
     </header>
   )
 }
-
-export default memo(Hero)

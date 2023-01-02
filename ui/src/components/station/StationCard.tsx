@@ -1,4 +1,3 @@
-import { memo } from 'react'
 import { Link } from 'react-router-dom'
 import Card from '../Card'
 import CardStat from '../CardStat'
@@ -7,7 +6,7 @@ interface StationCardProps {
   station: StationData
 }
 
-function StationCard({ station }: StationCardProps) {
+export default function StationCard({ station }: StationCardProps) {
   return (
     <Link to={`/stations/${station.id}`} className='flex flex-col overflow-hidden bg-white shadow sm:rounded-lg'>
       <Card title={station.name} description={station.water_body_name}>
@@ -28,5 +27,3 @@ function StationCard({ station }: StationCardProps) {
     </Link>
   )
 }
-
-export default memo(StationCard)

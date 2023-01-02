@@ -1,10 +1,9 @@
 import { ArrowPathIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
-import { memo } from 'react'
 import usePosition from '../../hooks/use-position'
 import Twemoji from '../utils/Twemoji'
 
-function LocateButton() {
+export default function LocateButton() {
 
   const { locate, requesting } = usePosition()
 
@@ -22,5 +21,3 @@ function LocateButton() {
     </button>
   )
 }
-
-export default memo(LocateButton)
