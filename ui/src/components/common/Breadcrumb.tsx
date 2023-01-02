@@ -4,7 +4,7 @@ import useBreadcrumbs from '../../hooks/use-breadcrumb'
 export default function Breadcrumb() {
   const { breadcrumbs } = useBreadcrumbs()
   
-  return <div className='hidden sm:block'>
+  return <div className='hidden sm:block mt-1'>
     {
       breadcrumbs.map(breadcrumb => (
     
