@@ -26,6 +26,8 @@ export default function Twemoji({ emoji, size = 'md', className }: TwemojiProps)
             __html: twemoji.parse(emoji, {
               folder: 'svg',
               ext: '.svg',
+              // FIXME : must follow the ongoing the situation on Twemoji repository
+              base: 'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/'
             }),
           } 
         }
