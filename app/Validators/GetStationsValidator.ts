@@ -6,7 +6,7 @@ export default class GetStationsValidator {
 
   public schema = schema.create({
     lat: schema.number.optional([rules.requiredIfExists('lon'), rules.range(-90, 90)]),
-    lon: schema.number.optional([rules.requiredIfExists('lat'), rules.range(-180, 180)])
+    lon: schema.number.optional([rules.requiredIfExists('lat'), rules.range(-180, 180)]),
   })
 
   public messages: CustomMessages = {
