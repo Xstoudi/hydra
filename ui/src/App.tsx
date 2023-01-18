@@ -11,7 +11,7 @@ import loadable from '@loadable/component'
 const AsyncStations = loadable(() => import('./pages/Stations'))
 const AsyncStation = loadable(() => import('./pages/Station'))
 
-function App() {
+export default function App() {
   return (
     <ScrollToTop>
       <Routes>
@@ -34,5 +34,3 @@ function App() {
     </ScrollToTop>
   )
 }
-
-export default App
