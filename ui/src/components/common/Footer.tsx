@@ -31,6 +31,7 @@ export default function Footer() {
               <a href='https://www.he-arc.ch/' className='text-blue-500'>HE Arc</a>
             </Trans>
           </p>
+          <img src='/arc.png' alt='Logo' className='w-96 mt-4' />
         </div>
       </div>
     </div>
