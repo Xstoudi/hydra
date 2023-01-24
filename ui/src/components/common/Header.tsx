@@ -8,7 +8,7 @@ export default function Header() {
       <div className='mx-auto flex w-full justify-between'>
         <div className='flex'>
           <Link to='/'>
-            <img src='hydra.svg' alt='Hydra logo' className='h-12 w-12 mr-2' />
+            <img src='/hydra.svg' alt='Hydra logo' className='h-12 w-12 mr-2' />
           </Link>
           <Link to='/' className='text-4xl font-semibold mt-1'>
             Hydra

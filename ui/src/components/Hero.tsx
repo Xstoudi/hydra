@@ -13,7 +13,7 @@ export default function Hero() {
           <LangSelector />
         </div>
         <div className='flex h-full w-full flex-col items-center justify-center gap-4 text-white'>
-          <img src='hydra.svg' alt='Hydra logo' className='h-60 w-60' />
+          <img src='/hydra.svg' alt='Hydra logo' className='h-60 w-60' />
           <h1 className='text-6xl'>Hydra</h1>
           <p className='text-center text-2xl'>{t('description')}</p>
           <Link to='/stations' className='rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 py-4 px-8 text-xl hover:bg-gradient-to-br'>{t('enter-app-button')}</Link>
