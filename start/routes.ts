@@ -11,6 +11,10 @@ Route.group(() => {
   .prefix('/api')
   .where('id', Route.matchers.number())
 
+Route.get('/', 'HomeController.index')
+Route.get('/stations', 'StationsController.index')
+Route.get('/stations/:id', 'StationsController.show')
+
 if (!Application.inDev) {
   const staticViewPromise = readFile(Application.publicPath('index.html'), 'utf-8')
 

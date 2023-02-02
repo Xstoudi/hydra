@@ -1,0 +1,43 @@
+{
+  "stations": "Stations",
+  "station": "Station",
+  "last_update": "Dernière mise à jour ",
+  "water_body_type": {
+    "river": "Rivière",
+    "lake": "Lac",
+    "well": "Puit",
+    "groundwater": "Eau souterraine",
+    "piezometer": "Piézomètre",
+    "spring": "Source"
+  },
+  "params": {
+    "temperature": "Température",
+    "discharge": "Débit",
+    "level": "Niveau d'eau"
+  },
+  "danger_levels": "Niveaux de danger",
+  "dl": "ND",
+  "errors": {
+    "geolocation": {
+      "unsupported": "Géolocalisation non supportée par votre appareil.",
+      "generic": "Une erreur est survenue en essayant de déterminer votre position."
+    },
+    "validation": {
+      "required": "La latitude et la longitude sont requises.",
+      "lat-range": "La latitude doit être comprise entre -90 et 90.",
+      "lon-range": "La longitude doit être comprise entre -180 et 180."
+    }
+  },
+  "date_pickers": {
+    "start": "Date de départ",
+    "end": "Date de fin"
+  },
+  "to": "à",
+  "aggregate": {
+    "none": "Aucun",
+    "hour": "Moyenne par heure",
+    "6-hours": "Moyenne sur 6 heures",
+    "12-hours": "Moyenne sur 12 heures",
+    "day": "Moyenne journalière"
+  }
+}

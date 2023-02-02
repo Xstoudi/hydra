@@ -1,0 +1,43 @@
+{
+  "stations": "Stations",
+  "station": "Station",
+  "last_update": "Last update",
+  "water_body_type": {
+    "river": "River",
+    "lake": "Lake",
+    "well": "Well",
+    "groundwater": "Groundwater",
+    "piezometer": "Piezometer",
+    "spring": "Spring"
+  },
+  "params": {
+    "temperature": "Temperature",
+    "discharge": "Discharge",
+    "level": "Water level"
+  },
+  "danger_levels": "Danger levels",
+  "dl": "DL",
+  "errors": {
+    "geolocation": {
+      "unsupported": "Geolocation is not supported on your device.",
+      "generic": "An error happened while trying to get your location"
+    },
+    "validation": {
+      "required": "Both latitude and longitude must be provided",
+      "lat-range": "Latitude must be between -90 and 90",
+      "lon-range": "Longitude must be between -180 and 180"
+    }
+  },
+  "date_pickers": {
+    "start": "Start date",
+    "end": "End date"
+  },
+  "to": "to",
+  "aggregate": {
+    "none": "None",
+    "hour": "Hourly average",
+    "6-hours": "6 hours average",
+    "12-hours": "12 hours average",
+    "day": "Daily average"
+  }
+}

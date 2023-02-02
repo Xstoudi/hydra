@@ -4,7 +4,8 @@
     "./commands",
     "@adonisjs/core/build/commands/index.js",
     "@adonisjs/repl/build/commands",
-    "@adonisjs/lucid/build/commands"
+    "@adonisjs/lucid/build/commands",
+    "@eidellev/inertia-adonisjs/build/commands"
   ],
   "exceptionHandlerNamespace": "App/Exceptions/Handler",
   "aliases": {
@@ -16,13 +17,22 @@
   "preloads": [
     "./start/routes",
     "./start/kernel",
-    "./start/db"
+    "./start/db",
+    {
+      "file": "./start/inertia",
+      "environment": [
+        "web"
+      ]
+    }
   ],
   "providers": [
     "./providers/AppProvider",
     "@adonisjs/core",
     "@adonisjs/lucid",
-    "@adonisjs/view"
+    "@adonisjs/view",
+    "@adonisjs/session",
+    "@eidellev/inertia-adonisjs",
+    "@adonisjs/i18n"
   ],
   "aceProviders": [
     "@adonisjs/repl"
@@ -49,6 +59,7 @@
     {
       "pattern": "resources/views/**/*.edge",
       "reloadServer": false
-    }
+    },
+    "resources/lang/**/*.(json|yaml)"
   ]
 }

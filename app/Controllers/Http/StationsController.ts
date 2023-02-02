@@ -7,6 +7,24 @@ import GetStationsValidator from 'App/Validators/GetStationsValidator'
 import { DateTime, Duration } from 'luxon'
 
 export default class StationsController {
+  public async index({ inertia }: HttpContextContract) {
+    const stations = await Station.query().withScopes((scopes) => scopes.withStats())
+    return inertia.render('Stations', {
+      stations: stations.map((station) => station.serialize()),
+    })
+  }
+
+  public async show({ inertia, request }: HttpContextContract) {
+    const station = await Station.query()
+      .where('id', request.param('id'))
+      .withScopes((scopes) => scopes.withStats())
+      .withScopes((scopes) => scopes.withDangerLevels())
+      .firstOrFail()
+    return inertia.render('Station', {
+      station: station.serialize(),
+    })
+  }
+
   public async stations({ request }: HttpContextContract) {
     const { lat, lon } = await request.validate(GetStationsValidator)
 

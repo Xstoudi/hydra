@@ -1,0 +1,22 @@
+{
+  "description": "Visualize swiss hydrological data.",
+  "enter-app-button": "Enter app",
+  "parts": {
+    "realtime": {
+      "title": "Realtime datas",
+      "description": "The data are polled from FOEV and updated on the website every ten minutes."
+    },
+    "opensource": {
+      "title": "Open Source",
+      "description": "This application is open source meaning you can read, modify and share the code."
+    },
+    "unverified": {
+      "title": "Unverified",
+      "description": "All informations on the website are live and therefore subject to variations from reality."
+    },
+    "responsive": {
+      "title": "Responsive",
+      "description": "The application is designed to be used on any device, from desktop to mobile."
+    }
+  }
+}

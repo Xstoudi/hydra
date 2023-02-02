@@ -1,0 +1,13 @@
+{
+  "errors": {
+    "fetch": "An error occured while fetching the stations. Please try again later."
+  },
+  "layout": {
+    "sources": "Sources",
+    "sources-info": "Data polled from <0>OFEV</0> through <1>SwissHydroApi</1>.",
+    "contact": "Contact",
+    "contact-info": "If you need to reach the maintainer of the application, please reach him at <0>xavier@stouder.io</0>.",
+    "about": "About",
+    "about-info": "This application is an open source project developed par Xavier Stouder, you can find the source code on <0>GitHub</0>. Hydra was created during my studies at <1>HE Arc</1>. All rights reserved."
+  }
+}
