@@ -16,6 +16,6 @@ export const inertia: InertiaConfig = {
   view: 'app',
   ssr: {
     enabled: true,
-    buildDirectory: './build/inertia/ssr',
+    buildDirectory: 'build/inertia',
   },
 }

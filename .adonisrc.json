@@ -31,8 +31,9 @@
     "@adonisjs/lucid",
     "@adonisjs/view",
     "@adonisjs/session",
+    "@adonisjs/i18n",
     "@eidellev/inertia-adonisjs",
-    "@adonisjs/i18n"
+    "@91codes/adonis-vite"
   ],
   "aceProviders": [
     "@adonisjs/repl"

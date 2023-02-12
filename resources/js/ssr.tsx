@@ -2,7 +2,7 @@ import ReactDOMServer from 'react-dom/server'
 import { createInertiaApp } from '@inertiajs/inertia-react'
 import Wrapper from './Wrapper'
 
-export default function render(page) {
+export default function render(page: string) {
   return createInertiaApp({
     page,
     render: ReactDOMServer.renderToString,

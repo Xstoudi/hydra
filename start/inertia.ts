@@ -10,13 +10,8 @@
 
 import Inertia from '@ioc:EidelLev/Inertia'
 
-Inertia.version(() => Inertia.manifestFile('public/assets/manifest.json'))
-
 Inertia.share({
-  errors: ({ session }) => {
-    return session.flashMessages.get('errors')
-  },
-  locale: ({ i18n }) => {
-    return i18n.locale
+  errors: (ctx) => {
+    return ctx.session.flashMessages.get('errors')
   },
 }).version(() => Inertia.manifestFile('public/assets/manifest.json'))
